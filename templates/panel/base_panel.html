@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Panel Admin{% endblock %} — Premier</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    body { background: #121414; color: #e2e2e2; font-family: 'Inter', sans-serif; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300; vertical-align: middle; }
+    .sg { font-family: 'Space Grotesk', sans-serif; }
+    input, select, textarea {
+      background: #1e2020 !important;
+      color: #e2e2e2 !important;
+      border: 1px solid #333535 !important;
+      border-radius: 0 !important;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none !important;
+      border-color: #d4af37 !important;
+      box-shadow: none !important;
+    }
+    input[type="checkbox"] { width: 18px; height: 18px; accent-color: #d4af37; }
+    select option { background: #1e2020; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Top bar -->
+  <header class="fixed top-0 left-0 right-0 z-50 h-14 bg-[#0c0f0f]/95 backdrop-blur border-b border-[#333535] flex items-center px-4 md:px-8 gap-4">
+    <span class="text-base font-black tracking-[0.2em] text-white uppercase mr-2">PREMIER</span>
+    <span class="sg text-xs text-[#d4af37] uppercase tracking-widest border border-[#d4af37]/30 px-2 py-0.5">Admin</span>
+    <div class="flex-1"></div>
+    <a href="/" target="_blank"
+       class="sg text-xs text-[#c5c6ca] hover:text-[#d4af37] uppercase tracking-widest transition-colors flex items-center gap-1">
+      <span class="material-symbols-outlined text-sm">open_in_new</span>
+      Ver sitio
+    </a>
+    <a href="{% url 'catalogo:panel_logout' %}"
+       class="sg text-xs text-[#c5c6ca] hover:text-red-400 uppercase tracking-widest transition-colors flex items-center gap-1">
+      <span class="material-symbols-outlined text-sm">logout</span>
+      Salir
+    </a>
+  </header>
+
+  <!-- Sidebar + contenido -->
+  <div class="flex flex-1 pt-14">
+    <!-- Sidebar -->
+    <aside class="hidden md:flex flex-col w-56 bg-[#0c0f0f] border-r border-[#333535] fixed top-14 bottom-0 left-0 px-4 py-6 gap-1">
+      <a href="{% url 'catalogo:panel_dashboard' %}"
+         class="sg flex items-center gap-2 px-3 py-2.5 text-xs uppercase tracking-widest transition-colors
+                {% block nav_productos %}text-[#c5c6ca] hover:text-[#d4af37] hover:bg-[#1e2020]{% endblock %}">
+        <span class="material-symbols-outlined text-lg">inventory_2</span>
+        Productos
+      </a>
+      <a href="{% url 'catalogo:panel_producto_nuevo' %}"
+         class="sg flex items-center gap-2 px-3 py-2.5 text-xs uppercase tracking-widest transition-colors
+                {% block nav_nuevo %}text-[#c5c6ca] hover:text-[#d4af37] hover:bg-[#1e2020]{% endblock %}">
+        <span class="material-symbols-outlined text-lg">add_box</span>
+        Nuevo producto
+      </a>
+      <a href="{% url 'catalogo:panel_categoria_nueva' %}"
+         class="sg flex items-center gap-2 px-3 py-2.5 text-xs uppercase tracking-widest transition-colors
+                {% block nav_categoria %}text-[#c5c6ca] hover:text-[#d4af37] hover:bg-[#1e2020]{% endblock %}">
+        <span class="material-symbols-outlined text-lg">category</span>
+        Nueva categoría
+      </a>
+      <div class="flex-1"></div>
+      <div class="border-t border-[#333535] pt-4">
+        <p class="sg text-[10px] text-[#47494d] uppercase tracking-widest px-3">{{ user.username }}</p>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="flex-1 md:ml-56 px-4 md:px-8 py-8">
+
+      <!-- Mensajes -->
+      {% for msg in messages %}
+      <div class="flex items-center gap-2 mb-6 px-4 py-3 border sg text-sm
+                  {% if msg.tags == 'success' %}bg-green-900/20 border-green-700/40 text-green-300
+                  {% else %}bg-red-900/20 border-red-700/40 text-red-300{% endif %}">
+        <span class="material-symbols-outlined text-base">
+          {% if msg.tags == 'success' %}check_circle{% else %}error{% endif %}
+        </span>
+        {{ msg }}
+      </div>
+      {% endfor %}
+
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+
+  <!-- Nav móvil -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 flex justify-around bg-[#0c0f0f] border-t border-[#333535] py-2">
+    <a href="{% url 'catalogo:panel_dashboard' %}" class="flex flex-col items-center text-[#c5c6ca] hover:text-[#d4af37] py-1">
+      <span class="material-symbols-outlined text-xl">inventory_2</span>
+      <span class="sg text-[9px] uppercase tracking-wider mt-0.5">Productos</span>
+    </a>
+    <a href="{% url 'catalogo:panel_producto_nuevo' %}" class="flex flex-col items-center text-[#c5c6ca] hover:text-[#d4af37] py-1">
+      <span class="material-symbols-outlined text-xl">add_box</span>
+      <span class="sg text-[9px] uppercase tracking-wider mt-0.5">Nuevo</span>
+    </a>
+    <a href="{% url 'catalogo:panel_categoria_nueva' %}" class="flex flex-col items-center text-[#c5c6ca] hover:text-[#d4af37] py-1">
+      <span class="material-symbols-outlined text-xl">category</span>
+      <span class="sg text-[9px] uppercase tracking-wider mt-0.5">Categoría</span>
+    </a>
+    <a href="{% url 'catalogo:panel_logout' %}" class="flex flex-col items-center text-[#c5c6ca] hover:text-red-400 py-1">
+      <span class="material-symbols-outlined text-xl">logout</span>
+      <span class="sg text-[9px] uppercase tracking-wider mt-0.5">Salir</span>
+    </a>
+  </nav>
+
+</body>
+</html>

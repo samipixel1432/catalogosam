@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bodega Premier — Licores y Bebidas Premium</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dorado: '#C9A84C',
+            'dorado-oscuro': '#A6852E',
+            crema: '#FAF7F2',
+            carbon: '#1A1A1A',
+            'gris-medio': '#6B6B6B',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body class="bg-crema text-carbon font-sans antialiased">
+
+  <!-- NAVBAR -->
+  <header class="bg-carbon sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="index.html" class="flex items-center gap-3">
+          <div class="w-8 h-8 border-2 border-dorado flex items-center justify-center">
+            <span class="text-dorado text-xs font-bold tracking-widest">BP</span>
+          </div>
+          <div>
+            <span class="text-white font-semibold text-sm tracking-widest uppercase">Bodega</span>
+            <span class="text-dorado font-light text-sm tracking-widest uppercase ml-1">Premier</span>
+          </div>
+        </a>
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="index.html" class="text-dorado border-b border-dorado text-sm tracking-wider uppercase">Inicio</a>
+          <a href="coleccion.html" class="text-gray-300 hover:text-dorado text-sm tracking-wider uppercase transition-colors duration-200">Coleccion</a>
+          <a href="https://wa.me/573105514455" target="_blank" rel="noopener"
+             class="bg-dorado text-carbon text-xs font-semibold tracking-widest uppercase px-5 py-2 hover:bg-dorado-oscuro transition-colors duration-200">
+            Contacto
+          </a>
+        </nav>
+        <button id="menu-btn" class="md:hidden text-gray-300 hover:text-dorado focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div id="menu-movil" class="hidden md:hidden bg-carbon border-t border-gray-700">
+      <div class="px-4 py-3 flex flex-col gap-4">
+        <a href="index.html" class="text-dorado text-sm tracking-wider uppercase">Inicio</a>
+        <a href="coleccion.html" class="text-gray-300 hover:text-dorado text-sm tracking-wider uppercase">Coleccion</a>
+        <a href="https://wa.me/573105514455" target="_blank" rel="noopener" class="text-gray-300 hover:text-dorado text-sm tracking-wider uppercase">Contacto</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="bg-carbon relative overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.06]"
+         style="background-image: repeating-linear-gradient(45deg,#C9A84C 0,#C9A84C 1px,transparent 0,transparent 50%);background-size:22px 22px;">
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 md:py-44 text-center">
+      <p class="text-dorado text-xs font-semibold tracking-[0.45em] uppercase mb-5">Distribuidor Autorizado Colombia</p>
+      <h1 class="text-white text-4xl md:text-6xl font-light leading-tight mb-6 tracking-tight">
+        Licores y Bebidas de
+        <span class="text-dorado font-semibold block mt-1">Alta Calidad</span>
+      </h1>
+      <p class="text-gray-400 text-base md:text-lg max-w-xl mx-auto mb-10 font-light leading-relaxed">
+        Seleccion curada de licores nacionales e importados, vinos y cervezas para ocasiones que merecen lo mejor.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="coleccion.html"
+           class="bg-dorado text-carbon font-semibold tracking-widest uppercase text-sm px-10 py-4 hover:bg-dorado-oscuro transition-colors duration-200">
+          Ver Coleccion
+        </a>
+        <a href="https://wa.me/573105514455?text=Hola%2C%20quiero%20cotizar%20productos%20de%20Bodega%20Premier"
+           target="_blank" rel="noopener"
+           class="border border-dorado text-dorado font-semibold tracking-widest uppercase text-sm px-10 py-4 hover:bg-dorado hover:text-carbon transition-colors duration-200">
+          Cotizar Ahora
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FRANJA DE STATS -->
+  <section class="bg-dorado">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+      <div class="grid grid-cols-3 divide-x divide-dorado-oscuro text-center">
+        <div class="px-4 py-2">
+          <p class="text-carbon font-bold text-2xl md:text-3xl">25+</p>
+          <p class="text-carbon text-xs tracking-widest uppercase font-medium mt-1">Productos</p>
+        </div>
+        <div class="px-4 py-2">
+          <p class="text-carbon font-bold text-2xl md:text-3xl">5</p>
+          <p class="text-carbon text-xs tracking-widest uppercase font-medium mt-1">Categorias</p>
+        </div>
+        <div class="px-4 py-2">
+          <p class="text-carbon font-bold text-2xl md:text-3xl">24h</p>
+          <p class="text-carbon text-xs tracking-widest uppercase font-medium mt-1">Respuesta</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTOS DESTACADOS -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="flex items-end justify-between mb-12">
+      <div>
+        <p class="text-dorado text-xs font-semibold tracking-[0.4em] uppercase mb-2">Seleccion</p>
+        <h2 class="text-3xl md:text-4xl font-light text-carbon tracking-tight">Productos Destacados</h2>
+      </div>
+      <a href="coleccion.html" class="hidden sm:block text-sm text-gris-medio hover:text-dorado tracking-widest uppercase transition-colors border-b border-transparent hover:border-dorado pb-0.5">
+        Ver todos
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- Producto 1 -->
+      <article class="group bg-white border border-gray-100 hover:border-dorado transition-all duration-300 hover:shadow-lg">
+        <a href="detalle.html?id=1">
+          <div class="aspect-[3/4] bg-gray-50 overflow-hidden relative flex items-center justify-center">
+            <div class="text-center p-6">
+              <div class="w-20 h-32 bg-amber-900 mx-auto mb-3 rounded-sm opacity-80"></div>
+              <span class="text-gray-400 text-xs tracking-wider">750ml</span>
+            </div>
+            <div class="absolute top-3 left-3">
+              <span class="bg-dorado text-carbon text-xs font-semibold tracking-widest uppercase px-2 py-1">Destacado</span>
+            </div>
+          </div>
+          <div class="p-4">
+            <p class="text-dorado text-xs tracking-widest uppercase mb-1">Licores Nacionales</p>
+            <h3 class="text-carbon font-medium text-sm leading-snug mb-3 group-hover:text-dorado transition-colors">
+              Aguardiente Antioqueño Sin Azucar 750ml
+            </h3>
+            <p class="text-carbon font-semibold text-base">$42.000</p>
+          </div>
+        </a>
+      </article>
+
+      <!-- Producto 2 -->
+      <article class="group bg-white border border-gray-100 hover:border-dorado transition-all duration-300 hover:shadow-lg">
+        <a href="detalle.html?id=2">
+          <div class="aspect-[3/4] bg-gray-50 overflow-hidden relative flex items-center justify-center">
+            <div class="text-center p-6">
+              <div class="w-20 h-32 bg-amber-700 mx-auto mb-3 rounded-sm opacity-80"></div>
+              <span class="text-gray-400 text-xs tracking-wider">750ml</span>
+            </div>
+            <div class="absolute top-3 left-3">
+              <span class="bg-dorado text-carbon text-xs font-semibold tracking-widest uppercase px-2 py-1">Destacado</span>
+            </div>
+          </div>
+          <div class="p-4">
+            <p class="text-dorado text-xs tracking-widest uppercase mb-1">Licores Nacionales</p>
+            <h3 class="text-carbon font-medium text-sm leading-snug mb-3 group-hover:text-dorado transition-colors">
+              Ron Medellin Anejo 750ml
+            </h3>
+            <p class="text-carbon font-semibold text-base">$55.000</p>
+          </div>
+        </a>
+      </article>
+
+      <!-- Producto 3 -->
+      <article class="group bg-white border border-gray-100 hover:border-dorado transition-all duration-300 hover:shadow-lg">
+        <a href="detalle.html?id=3">
+          <div class="aspect-[3/4] bg-gray-50 overflow-hidden relative flex items-center justify-center">
+            <div class="text-center p-6">
+              <div class="w-20 h-32 bg-red-800 mx-auto mb-3 rounded-sm opacity-70"></div>
+              <span class="text-gray-400 text-xs tracking-wider">750ml</span>
+            </div>
+            <div class="absolute top-3 left-3">
+              <span class="bg-dorado text-carbon text-xs font-semibold tracking-widest uppercase px-2 py-1">Destacado</span>
+            </div>
+          </div>
+          <div class="p-4">
+            <p class="text-dorado text-xs tracking-widest uppercase mb-1">Vinos</p>
+            <h3 class="text-carbon font-medium text-sm leading-snug mb-3 group-hover:text-dorado transition-colors">
+              Casillero del Diablo Cabernet Sauvignon 750ml
+            </h3>
+            <p class="text-carbon font-semibold text-base">$48.000</p>
+          </div>
+        </a>
+      </article>
+
+      <!-- Producto 4 -->
+      <article class="group bg-white border border-gray-100 hover:border-dorado transition-all duration-300 hover:shadow-lg">
+        <a href="detalle.html?id=4">
+          <div class="aspect-[3/4] bg-gray-50 overflow-hidden relative flex items-center justify-center">
+            <div class="text-center p-6">
+              <div class="w-20 h-32 bg-gray-300 mx-auto mb-3 rounded-sm opacity-80"></div>
+              <span class="text-gray-400 text-xs tracking-wider">750ml</span>
+            </div>
+            <div class="absolute top-3 left-3">
+              <span class="bg-dorado text-carbon text-xs font-semibold tracking-widest uppercase px-2 py-1">Destacado</span>
+            </div>
+          </div>
+          <div class="p-4">
+            <p class="text-dorado text-xs tracking-widest uppercase mb-1">Licores Importados</p>
+            <h3 class="text-carbon font-medium text-sm leading-snug mb-3 group-hover:text-dorado transition-colors">
+              Vodka Absolut Original 750ml
+            </h3>
+            <p class="text-carbon font-semibold text-base">$85.000</p>
+          </div>
+        </a>
+      </article>
+
+    </div>
+
+    <div class="text-center mt-10 sm:hidden">
+      <a href="coleccion.html"
+         class="inline-block border border-carbon text-carbon text-xs font-semibold tracking-widest uppercase px-8 py-3 hover:bg-carbon hover:text-white transition-colors duration-200">
+        Ver todos los productos
+      </a>
+    </div>
+  </section>
+
+  <!-- CATEGORIAS -->
+  <section class="bg-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <p class="text-dorado text-xs font-semibold tracking-[0.4em] uppercase mb-2">Explora</p>
+        <h2 class="text-3xl md:text-4xl font-light text-carbon tracking-tight">Nuestras Categorias</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <a href="coleccion.html?categoria=licores-nacionales"
+           class="group border border-gray-100 hover:border-dorado p-6 text-center transition-all duration-200 hover:shadow-md">
+          <div class="w-10 h-10 border border-gray-200 group-hover:border-dorado mx-auto mb-3 flex items-center justify-center transition-colors">
+            <span class="text-gris-medio group-hover:text-dorado text-sm font-semibold transition-colors">L</span>
+          </div>
+          <p class="text-carbon text-sm font-medium group-hover:text-dorado transition-colors">Licores Nacionales</p>
+          <p class="text-gris-medio text-xs mt-1">6 productos</p>
+        </a>
+        <a href="coleccion.html?categoria=vinos"
+           class="group border border-gray-100 hover:border-dorado p-6 text-center transition-all duration-200 hover:shadow-md">
+          <div class="w-10 h-10 border border-gray-200 group-hover:border-dorado mx-auto mb-3 flex items-center justify-center transition-colors">
+            <span class="text-gris-medio group-hover:text-dorado text-sm font-semibold transition-colors">V</span>
+          </div>
+          <p class="text-carbon text-sm font-medium group-hover:text-dorado transition-colors">Vinos</p>
+          <p class="text-gris-medio text-xs mt-1">4 productos</p>
+        </a>
+        <a href="coleccion.html?categoria=cervezas"
+           class="group border border-gray-100 hover:border-dorado p-6 text-center transition-all duration-200 hover:shadow-md">
+          <div class="w-10 h-10 border border-gray-200 group-hover:border-dorado mx-auto mb-3 flex items-center justify-center transition-colors">
+            <span class="text-gris-medio group-hover:text-dorado text-sm font-semibold transition-colors">C</span>
+          </div>
+          <p class="text-carbon text-sm font-medium group-hover:text-dorado transition-colors">Cervezas</p>
+          <p class="text-gris-medio text-xs mt-1">4 productos</p>
+        </a>
+        <a href="coleccion.html?categoria=importados"
+           class="group border border-gray-100 hover:border-dorado p-6 text-center transition-all duration-200 hover:shadow-md">
+          <div class="w-10 h-10 border border-gray-200 group-hover:border-dorado mx-auto mb-3 flex items-center justify-center transition-colors">
+            <span class="text-gris-medio group-hover:text-dorado text-sm font-semibold transition-colors">I</span>
+          </div>
+          <p class="text-carbon text-sm font-medium group-hover:text-dorado transition-colors">Importados</p>
+          <p class="text-gris-medio text-xs mt-1">4 productos</p>
+        </a>
+        <a href="coleccion.html?categoria=no-alcoholicas"
+           class="group border border-gray-100 hover:border-dorado p-6 text-center transition-all duration-200 hover:shadow-md">
+          <div class="w-10 h-10 border border-gray-200 group-hover:border-dorado mx-auto mb-3 flex items-center justify-center transition-colors">
+            <span class="text-gris-medio group-hover:text-dorado text-sm font-semibold transition-colors">N</span>
+          </div>
+          <p class="text-carbon text-sm font-medium group-hover:text-dorado transition-colors">No Alcoholicas</p>
+          <p class="text-gris-medio text-xs mt-1">3 productos</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNER CTA WHATSAPP -->
+  <section class="bg-carbon py-20">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <p class="text-dorado text-xs font-semibold tracking-[0.4em] uppercase mb-3">Atencion Personalizada</p>
+      <h2 class="text-white text-2xl md:text-3xl font-light mb-4 tracking-tight">
+        Pedidos al por mayor y eventos especiales
+      </h2>
+      <p class="text-gray-400 text-sm mb-8 leading-relaxed max-w-lg mx-auto">
+        Precios especiales para eventos, empresas y pedidos al por mayor. Contactanos directamente para una cotizacion personalizada.
+      </p>
+      <a href="https://wa.me/573105514455?text=Hola%2C%20quiero%20cotizar%20al%20por%20mayor%20en%20Bodega%20Premier"
+         target="_blank" rel="noopener"
+         class="inline-flex items-center gap-3 bg-[#25D366] text-white font-semibold tracking-wider uppercase text-sm px-10 py-4 hover:bg-[#1ebe57] transition-colors duration-200">
+        <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.124.556 4.118 1.528 5.848L0 24l6.318-1.508A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.645-.523-5.148-1.428l-.369-.22-3.75.895.912-3.659-.241-.376A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+        </svg>
+        Escribir por WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-carbon border-t border-gray-800 text-gray-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-7 h-7 border-2 border-dorado flex items-center justify-center">
+              <span class="text-dorado text-xs font-bold">BP</span>
+            </div>
+            <span class="text-white font-light tracking-widest uppercase text-sm">Bodega Premier</span>
+          </div>
+          <p class="text-sm leading-relaxed text-gray-500">
+            Distribuidor de licores y bebidas de alta calidad en Colombia. Servicio personalizado para eventos y empresas.
+          </p>
+        </div>
+        <div>
+          <h4 class="text-dorado text-xs font-semibold tracking-widest uppercase mb-4">Navegacion</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="index.html" class="hover:text-dorado transition-colors">Inicio</a></li>
+            <li><a href="coleccion.html" class="hover:text-dorado transition-colors">Coleccion completa</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-dorado text-xs font-semibold tracking-widest uppercase mb-4">Contacto</h4>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a href="https://wa.me/573105514455" target="_blank" rel="noopener" class="hover:text-dorado transition-colors flex items-center gap-2">
+                <svg class="w-4 h-4 text-dorado shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.124.556 4.118 1.528 5.848L0 24l6.318-1.508A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.645-.523-5.148-1.428l-.369-.22-3.75.895.912-3.659-.241-.376A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+                </svg>
+                +57 310 551 4455
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 mt-10 pt-6 text-center text-xs text-gray-600 tracking-wider">
+        &copy; 2025 Bodega Premier. Todos los derechos reservados. Venta exclusiva para mayores de edad.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('menu-movil');
+    btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+  </script>
+</body>
+</html>

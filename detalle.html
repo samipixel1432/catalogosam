@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Producto — Bodega Premier</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dorado: '#C9A84C',
+            'dorado-oscuro': '#A6852E',
+            crema: '#FAF7F2',
+            carbon: '#1A1A1A',
+            'gris-medio': '#6B6B6B',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body class="bg-crema text-carbon font-sans antialiased">
+
+  <!-- NAVBAR -->
+  <header class="bg-carbon sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="index.html" class="flex items-center gap-3">
+          <div class="w-8 h-8 border-2 border-dorado flex items-center justify-center">
+            <span class="text-dorado text-xs font-bold tracking-widest">BP</span>
+          </div>
+          <div>
+            <span class="text-white font-semibold text-sm tracking-widest uppercase">Bodega</span>
+            <span class="text-dorado font-light text-sm tracking-widest uppercase ml-1">Premier</span>
+          </div>
+        </a>
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="index.html" class="text-gray-300 hover:text-dorado text-sm tracking-wider uppercase transition-colors duration-200">Inicio</a>
+          <a href="coleccion.html" class="text-gray-300 hover:text-dorado text-sm tracking-wider uppercase transition-colors duration-200">Coleccion</a>
+          <a href="https://wa.me/573105514455" target="_blank" rel="noopener"
+             class="bg-dorado text-carbon text-xs font-semibold tracking-widest uppercase px-5 py-2 hover:bg-dorado-oscuro transition-colors duration-200">
+            Contacto
+          </a>
+        </nav>
+        <button id="menu-btn" class="md:hidden text-gray-300 hover:text-dorado focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div id="menu-movil" class="hidden md:hidden bg-carbon border-t border-gray-700">
+      <div class="px-4 py-3 flex flex-col gap-4">
+        <a href="index.html" class="text-gray-300 hover:text-dorado text-sm tracking-wider uppercase">Inicio</a>
+        <a href="coleccion.html" class="text-gray-300 hover:text-dorado text-sm tracking-wider uppercase">Coleccion</a>
+        <a href="https://wa.me/573105514455" target="_blank" rel="noopener" class="text-gray-300 hover:text-dorado text-sm tracking-wider uppercase">Contacto</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- BREADCRUMB -->
+  <div class="bg-white border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <nav class="flex items-center gap-2 text-xs text-gris-medio tracking-wider">
+        <a href="index.html" class="hover:text-dorado transition-colors uppercase">Inicio</a>
+        <span>/</span>
+        <a href="coleccion.html" class="hover:text-dorado transition-colors uppercase">Coleccion</a>
+        <span>/</span>
+        <span class="text-carbon uppercase" id="breadcrumb-nombre">Producto</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- DETALLE DEL PRODUCTO -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+
+      <!-- IMAGEN -->
+      <div class="bg-white border border-gray-100 aspect-square flex items-center justify-center relative overflow-hidden group">
+        <div id="imagen-producto" class="text-center p-10">
+          <!-- Placeholder reemplazado por JS -->
+          <div class="w-32 h-52 bg-gray-200 mx-auto rounded-sm"></div>
+        </div>
+        <div id="badge-destacado" class="absolute top-4 left-4 hidden">
+          <span class="bg-dorado text-carbon text-xs font-semibold tracking-widest uppercase px-3 py-1">Destacado</span>
+        </div>
+      </div>
+
+      <!-- INFO -->
+      <div class="py-2">
+        <p id="cat-nombre" class="text-dorado text-xs font-semibold tracking-[0.4em] uppercase mb-3"></p>
+        <h1 id="prod-nombre" class="text-carbon text-2xl md:text-3xl font-light leading-tight tracking-tight mb-2"></h1>
+        <p id="prod-ref" class="text-gris-medio text-xs tracking-widest mb-6"></p>
+
+        <div class="border-t border-b border-gray-100 py-6 my-6">
+          <p class="text-gris-medio text-xs tracking-widest uppercase mb-1">Precio</p>
+          <p id="prod-precio" class="text-carbon text-3xl font-semibold tracking-tight"></p>
+        </div>
+
+        <p id="prod-desc-corta" class="text-gris-medio text-sm leading-relaxed mb-6"></p>
+
+        <!-- BOTONES DE ACCION -->
+        <div class="flex flex-col sm:flex-row gap-3 mb-8">
+          <a id="btn-cotizar" href="#" target="_blank" rel="noopener"
+             class="flex-1 flex items-center justify-center gap-3 bg-[#25D366] text-white font-semibold tracking-widest uppercase text-sm px-6 py-4 hover:bg-[#1ebe57] transition-colors duration-200">
+            <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.124.556 4.118 1.528 5.848L0 24l6.318-1.508A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.645-.523-5.148-1.428l-.369-.22-3.75.895.912-3.659-.241-.376A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+            </svg>
+            Cotizar por WhatsApp
+          </a>
+          <a href="coleccion.html"
+             class="flex-1 flex items-center justify-center border border-carbon text-carbon font-semibold tracking-widest uppercase text-sm px-6 py-4 hover:bg-carbon hover:text-white transition-colors duration-200">
+            Ver mas productos
+          </a>
+        </div>
+
+        <!-- CARACTERISTICAS -->
+        <div class="border border-gray-100 divide-y divide-gray-100" id="caracteristicas">
+          <!-- llenado por JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- DESCRIPCION COMPLETA -->
+    <div class="mt-14 max-w-3xl">
+      <h2 class="text-carbon text-xl font-light tracking-tight mb-4">Descripcion del producto</h2>
+      <div class="w-10 h-px bg-dorado mb-6"></div>
+      <p id="prod-descripcion" class="text-gris-medio text-sm leading-relaxed"></p>
+    </div>
+
+    <!-- PRODUCTOS RELACIONADOS -->
+    <div class="mt-16">
+      <p class="text-dorado text-xs font-semibold tracking-[0.4em] uppercase mb-2">Tambien puede interesarte</p>
+      <h2 class="text-carbon text-2xl font-light tracking-tight mb-8">Productos Relacionados</h2>
+      <div id="relacionados" class="grid grid-cols-2 md:grid-cols-4 gap-5"></div>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-carbon border-t border-gray-800 text-gray-400 mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-7 h-7 border-2 border-dorado flex items-center justify-center">
+              <span class="text-dorado text-xs font-bold">BP</span>
+            </div>
+            <span class="text-white font-light tracking-widest uppercase text-sm">Bodega Premier</span>
+          </div>
+          <p class="text-sm leading-relaxed text-gray-500">Distribuidor de licores y bebidas de alta calidad en Colombia.</p>
+        </div>
+        <div>
+          <h4 class="text-dorado text-xs font-semibold tracking-widest uppercase mb-4">Navegacion</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="index.html" class="hover:text-dorado transition-colors">Inicio</a></li>
+            <li><a href="coleccion.html" class="hover:text-dorado transition-colors">Coleccion completa</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-dorado text-xs font-semibold tracking-widest uppercase mb-4">Contacto</h4>
+          <a href="https://wa.me/573105514455" target="_blank" rel="noopener"
+             class="hover:text-dorado transition-colors flex items-center gap-2 text-sm">
+            <svg class="w-4 h-4 text-dorado shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.124.556 4.118 1.528 5.848L0 24l6.318-1.508A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.645-.523-5.148-1.428l-.369-.22-3.75.895.912-3.659-.241-.376A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+            </svg>
+            +57 310 551 4455
+          </a>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 mt-10 pt-6 text-center text-xs text-gray-600 tracking-wider">
+        &copy; 2025 Bodega Premier. Todos los derechos reservados. Venta exclusiva para mayores de edad.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('menu-movil');
+    btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+
+    const PRODUCTOS = {
+      1: {
+        nombre: 'Aguardiente Antioqueño Sin Azucar 750ml',
+        referencia: 'LN-001',
+        categoria: 'Licores Nacionales',
+        catSlug: 'licores-nacionales',
+        precio: '$42.000',
+        descCorta: 'Aguardiente tradicional antioqueno sin azucar, 29 grados de alcohol.',
+        descripcion: 'El Aguardiente Antioqueño Sin Azucar es la version premium del licor emblematico de Antioquia. Elaborado con anis estrellado de alta calidad, ofrece un sabor limpio y fresco sin la dulzura del azucar. Con 29 grados de alcohol, es ideal para disfrutar puro, en las rocas o en cocteleria. Su proceso de destilacion garantiza una pureza excepcional y un sabor caracteristico que lo ha convertido en uno de los licores mas vendidos de Colombia.',
+        destacado: true,
+        color: 'bg-amber-900',
+        specs: [['Contenido', '750 ml'], ['Alcohol', '29%'], ['Origen', 'Antioquia, Colombia'], ['Tipo', 'Aguardiente']],
+        relacionados: [2, 4, 5, 6],
+      },
+      2: {
+        nombre: 'Aguardiente Antioqueño Rojo 750ml',
+        referencia: 'LN-002',
+        categoria: 'Licores Nacionales',
+        catSlug: 'licores-nacionales',
+        precio: '$38.000',
+        descCorta: 'Aguardiente clasico antioqueno con azucar, botella roja 29 grados.',
+        descripcion: 'El Aguardiente Antioqueño Rojo es el licor tradicional de Colombia por excelencia. Con su distintivo sabor a anis y un toque dulce, es perfecto para reuniones y celebraciones. Contenido de 750ml con 29 grados de alcohol. Producido por la Fabrica de Licores de Antioquia, garantiza la calidad y tradicion de mas de un siglo de historia.',
+        destacado: true,
+        color: 'bg-red-900',
+        specs: [['Contenido', '750 ml'], ['Alcohol', '29%'], ['Origen', 'Antioquia, Colombia'], ['Tipo', 'Aguardiente']],
+        relacionados: [1, 4, 5, 6],
+      },
+      3: {
+        nombre: 'Ron Medellin Anejo 750ml',
+        referencia: 'LN-003',
+        categoria: 'Licores Nacionales',
+        catSlug: 'licores-nacionales',
+        precio: '$55.000',
+        descCorta: 'Ron colombiano anejado en barriles de roble, 8 años de madurez.',
+        descripcion: 'Ron Medellin Anejo es un ron premium colombiano con 8 años de envejecimiento en barriles de roble americano. Su color ambar profundo y su aroma complejo con notas de vainilla, caramelo y especias lo distinguen. En boca es suave y aterciopelado, con un final largo y calido. Ideal para disfrutar solo o en los mejores cocktails. Premiado internacionalmente como uno de los mejores rones del mundo.',
+        destacado: true,
+        color: 'bg-amber-700',
+        specs: [['Contenido', '750 ml'], ['Alcohol', '35%'], ['Origen', 'Medellin, Colombia'], ['Tipo', 'Ron Anejo'], ['Madurez', '8 anos en barrica']],
+        relacionados: [1, 2, 18, 6],
+      },
+      4: {
+        nombre: 'Aguardiente Nectar 750ml',
+        referencia: 'LN-004',
+        categoria: 'Licores Nacionales',
+        catSlug: 'licores-nacionales',
+        precio: '$36.000',
+        descCorta: 'Aguardiente suave del Valle del Cauca, 29 grados.',
+        descripcion: 'Nectar es el aguardiente del Valle del Cauca, reconocido por su suavidad y su caracteristico sabor a anis. A diferencia de otros aguardientes, Nectar tiene un perfil mas suave y menos dulce, lo que lo hace muy popular entre quienes prefieren sabores mas delicados. Contiene 29 grados de alcohol y viene en presentacion de 750ml.',
+        destacado: false,
+        color: 'bg-cyan-700',
+        specs: [['Contenido', '750 ml'], ['Alcohol', '29%'], ['Origen', 'Valle del Cauca, Colombia'], ['Tipo', 'Aguardiente']],
+        relacionados: [1, 2, 5, 6],
+      },
+      5: {
+        nombre: 'Aguardiente Tapa Roja 750ml',
+        referencia: 'LN-005',
+        categoria: 'Licores Nacionales',
+        catSlug: 'licores-nacionales',
+        precio: '$34.000',
+        descCorta: 'Aguardiente economico de alta rotacion, 29 grados.',
+        descripcion: 'Tapa Roja es el aguardiente de mayor accesibilidad en el mercado colombiano. Con 29 grados de alcohol y el tipico sabor a anis, es la opcion preferida para eventos masivos y reuniones. Su relacion calidad-precio lo posiciona como lider en ventas en las principales ciudades de Colombia.',
+        destacado: false,
+        color: 'bg-orange-500',
+        specs: [['Contenido', '750 ml'], ['Alcohol', '29%'], ['Origen', 'Colombia'], ['Tipo', 'Aguardiente']],
+        relacionados: [1, 2, 4, 6],
+      },
+      6: {
+        nombre: 'Whisky Old Parr 750ml',
+        referencia: 'LN-006',
+        categoria: 'Licores Nacionales',
+        catSlug: 'licores-nacionales',
+        precio: '$130.000',
+        descCorta: 'Scotch whisky blended, botella iconica, 12 anos de madurez.',
+        descripcion: 'Old Parr es un Scotch Whisky Blended de origen escoces, ampliamente popular en Colombia. Su mezcla de maltas y granos de 12 anos de madurez aporta un sabor suave con notas de frutas, miel y madera tostada. Su iconica botella de vidrio texturizado lo hace inconfundible. Ideal para beber con hielo o en mezclas clasicas como el whisky sour.',
+        destacado: true,
+        color: 'bg-amber-800',
+        specs: [['Contenido', '750 ml'], ['Alcohol', '40%'], ['Origen', 'Escocia'], ['Tipo', 'Scotch Whisky Blended'], ['Madurez', '12 anos']],
+        relacionados: [3, 15, 16, 17],
+      },
+      7: {
+        nombre: 'Casillero del Diablo Cabernet Sauvignon 750ml',
+        referencia: 'VI-001',
+        categoria: 'Vinos',
+        catSlug: 'vinos',
+        precio: '$48.000',
+        descCorta: 'Vino tinto chileno de gran caracter, uva Cabernet Sauvignon.',
+        descripcion: 'Casillero del Diablo Cabernet Sauvignon es un vino tinto iconico de la Vina Concha y Toro, Chile. Elaborado con uvas Cabernet Sauvignon del Valle de Maipo, presenta un color rojo intenso con tonos violaceos. En nariz ofrece aromas a frutas negras maduras, especias y un toque ahumado. En boca es estructurado, con taninos presentes y un final largo. Perfecto para acompañar carnes rojas, pastas y quesos curados.',
+        destacado: true,
+        color: 'bg-red-800',
+        specs: [['Contenido', '750 ml'], ['Tipo', 'Vino Tinto'], ['Uva', 'Cabernet Sauvignon'], ['Origen', 'Valle de Maipo, Chile'], ['Maridaje', 'Carnes rojas, pastas']],
+        relacionados: [8, 9, 10, 6],
+      },
+      8: {
+        nombre: 'Santa Rita Reserva Carmenere 750ml',
+        referencia: 'VI-002',
+        categoria: 'Vinos',
+        catSlug: 'vinos',
+        precio: '$45.000',
+        descCorta: 'Vino tinto chileno varietal Carmenere, suave y frutal.',
+        descripcion: 'Santa Rita Reserva Carmenere es un excelente exponente de la cepa insignia de Chile. Con aromas a frutas rojas y negras, pimienta verde y notas herbal, este vino es elegante y accesible. En boca presenta buena estructura, taninos suaves y una acidez equilibrada. Maridaje ideal: carnes a la parrilla, empanadas y platos condimentados.',
+        destacado: false,
+        color: 'bg-red-700',
+        specs: [['Contenido', '750 ml'], ['Tipo', 'Vino Tinto'], ['Uva', 'Carmenere'], ['Origen', 'Chile'], ['Maridaje', 'Carnes a la parrilla']],
+        relacionados: [7, 9, 10, 6],
+      },
+      9: {
+        nombre: 'Gato Negro Sauvignon Blanc 750ml',
+        referencia: 'VI-003',
+        categoria: 'Vinos',
+        catSlug: 'vinos',
+        precio: '$32.000',
+        descCorta: 'Vino blanco fresco y frutal, ideal para el calor.',
+        descripcion: 'Gato Negro Sauvignon Blanc es un vino blanco fresco y vibrante de la bodega San Pedro, Chile. Presenta un color amarillo palido con reflejos verdosos. Sus aromas evocan frutas tropicales, citricos y un toque herbal. En boca es fresco, ligero y con buena acidez. Excelente para acompañar mariscos, ensaladas, quesos frescos y como aperitivo.',
+        destacado: false,
+        color: 'bg-yellow-200',
+        specs: [['Contenido', '750 ml'], ['Tipo', 'Vino Blanco'], ['Uva', 'Sauvignon Blanc'], ['Origen', 'Chile'], ['Maridaje', 'Mariscos, ensaladas']],
+        relacionados: [7, 8, 10, 19],
+      },
+      10: {
+        nombre: 'Frontera Rosado Concha y Toro 750ml',
+        referencia: 'VI-004',
+        categoria: 'Vinos',
+        catSlug: 'vinos',
+        precio: '$28.000',
+        descCorta: 'Vino rosado semiseco, frutal y refrescante.',
+        descripcion: 'Frontera Rosado de Concha y Toro es un vino rosado ligero, ideal para ocasiones informales y celebraciones. Con un color salmon brillante y aromas a fresas, frambuesas y flores, su perfil es suave y agradable. Levemente semiseco, es muy accesible al paladar. Perfecto para acompañar comidas ligeras, postres de frutas y como aperitivo en reuniones.',
+        destacado: true,
+        color: 'bg-pink-400',
+        specs: [['Contenido', '750 ml'], ['Tipo', 'Vino Rosado'], ['Origen', 'Chile'], ['Estilo', 'Semiseco'], ['Maridaje', 'Comidas ligeras, postres']],
+        relacionados: [7, 8, 9, 19],
+      },
+      11: {
+        nombre: 'Cerveza Poker Lata 330ml x6',
+        referencia: 'CE-001',
+        categoria: 'Cervezas',
+        catSlug: 'cervezas',
+        precio: '$24.000',
+        descCorta: 'Six pack de cerveza colombiana Poker, clasica y refrescante.',
+        descripcion: 'Poker es la cerveza rubia tipo lager mas popular de Colombia. Con un sabor suave, refrescante y equilibrado, es perfecta para cualquier ocasion. Pack de 6 latas de 330ml. Contenido de alcohol: 4.0 grados. Producida por Bavaria S.A., su formula consistente la ha convertido en la favorita de millones de colombianos por mas de 80 anos.',
+        destacado: true,
+        color: 'bg-yellow-500',
+        specs: [['Contenido', '6 x 330 ml'], ['Alcohol', '4.0%'], ['Tipo', 'Lager Rubia'], ['Origen', 'Colombia'], ['Formato', 'Lata']],
+        relacionados: [12, 13, 14, 19],
+      },
+      12: {
+        nombre: 'Cerveza Club Colombia 330ml x6',
+        referencia: 'CE-002',
+        categoria: 'Cervezas',
+        catSlug: 'cervezas',
+        precio: '$30.000',
+        descCorta: 'Six pack cerveza premium colombiana, caracteristico sabor suave.',
+        descripcion: 'Club Colombia es la cerveza premium de Bavaria S.A., elaborada con los mejores ingredientes para garantizar una experiencia unica. Su proceso de elaboracion con cebada malteada seleccionada y lupulos de alta calidad le da un sabor suave, balanceado y con cuerpo. Pack de 6 botellas de 330ml. Alcohol: 4.7 grados.',
+        destacado: false,
+        color: 'bg-amber-600',
+        specs: [['Contenido', '6 x 330 ml'], ['Alcohol', '4.7%'], ['Tipo', 'Lager Premium'], ['Origen', 'Colombia'], ['Formato', 'Botella']],
+        relacionados: [11, 13, 14, 19],
+      },
+      13: {
+        nombre: 'Cerveza Corona Extra 355ml x6',
+        referencia: 'CE-003',
+        categoria: 'Cervezas',
+        catSlug: 'cervezas',
+        precio: '$42.000',
+        descCorta: 'Six pack de la cerveza mexicana premium mas vendida del mundo.',
+        descripcion: 'Corona Extra es la cerveza mexicana mas exportada del mundo y un simbolo de la cultura de playa y disfrute. Su sabor suave y refrescante, con toque de malta y la tradicion de servirla con limon, la hacen unica. Pack de 6 botellas de vidrio transparente de 355ml. Grado alcoholico: 4.5 grados.',
+        destacado: true,
+        color: 'bg-yellow-300',
+        specs: [['Contenido', '6 x 355 ml'], ['Alcohol', '4.5%'], ['Tipo', 'Lager'], ['Origen', 'Mexico'], ['Formato', 'Botella']],
+        relacionados: [11, 12, 14, 19],
+      },
+      14: {
+        nombre: 'Cerveza Heineken 330ml x6',
+        referencia: 'CE-004',
+        categoria: 'Cervezas',
+        catSlug: 'cervezas',
+        precio: '$44.000',
+        descCorta: 'Six pack de la cerveza holandesa premium, sabor ligeramente amargo.',
+        descripcion: 'Heineken es una de las cervezas mas reconocidas del mundo, elaborada en los Paises Bajos. Su sabor ligeramente amargo y refrescante proviene de su exclusiva cepa de levadura A-yeast. Pack de 6 botellas de 330ml. Contenido alcoholico: 5.0 grados. Ideal para maridar con hamburguesas, pizza y comidas picantes.',
+        destacado: false,
+        color: 'bg-green-600',
+        specs: [['Contenido', '6 x 330 ml'], ['Alcohol', '5.0%'], ['Tipo', 'Lager'], ['Origen', 'Paises Bajos'], ['Formato', 'Botella']],
+        relacionados: [11, 12, 13, 19],
+      },
+      15: {
+        nombre: 'Vodka Absolut Original 750ml',
+        referencia: 'LI-001',
+        categoria: 'Licores Importados',
+        catSlug: 'importados',
+        precio: '$85.000',
+        descCorta: 'Vodka sueco premium elaborado con trigo de invierno, 40 grados.',
+        descripcion: 'Absolut Vodka es un vodka de grano premium producido en Ahus, Suecia, desde 1879. Elaborado exclusivamente con trigo de invierno cultivado en Suecia y agua pura de manantial profundo, es destilado continuamente para lograr su pureza y suavidad caracteristicas. Con 40 grados de alcohol, es la base perfecta para los mejores cocktails: Cosmopolitan, Bloody Mary, Vodka Tonic y mucho mas.',
+        destacado: true,
+        color: 'bg-gray-300',
+        specs: [['Contenido', '750 ml'], ['Alcohol', '40%'], ['Origen', 'Suecia'], ['Tipo', 'Vodka de Grano'], ['Base', 'Trigo de invierno']],
+        relacionados: [16, 17, 18, 6],
+      },
+      16: {
+        nombre: 'Tequila Jose Cuervo Especial 750ml',
+        referencia: 'LI-002',
+        categoria: 'Licores Importados',
+        catSlug: 'importados',
+        precio: '$98.000',
+        descCorta: 'Tequila dorado mexicano premium, suave y aromatico.',
+        descripcion: 'Jose Cuervo Especial es el tequila mas vendido del mundo. Producido en Tequila, Jalisco, Mexico, con agave azul 100% de las Highlands. Su color dorado proviene de su envejecimiento en barriles de roble. En nariz presenta aromas a agave, vainilla y especias. En boca es suave con notas de caramelo y madera. 38 grados de alcohol. Perfecto para shots, Margarita y Tequila Sunrise.',
+        destacado: false,
+        color: 'bg-amber-400',
+        specs: [['Contenido', '750 ml'], ['Alcohol', '38%'], ['Origen', 'Jalisco, Mexico'], ['Tipo', 'Tequila Dorado'], ['Agave', '100% Agave Azul']],
+        relacionados: [15, 17, 18, 6],
+      },
+      17: {
+        nombre: 'Gin Tanqueray London Dry 750ml',
+        referencia: 'LI-003',
+        categoria: 'Licores Importados',
+        catSlug: 'importados',
+        precio: '$115.000',
+        descCorta: 'Gin britanico clasico, cuatro botanicos seleccionados, 47 grados.',
+        descripcion: 'Tanqueray London Dry Gin es uno de los gins mas premiados del mundo. Creado en 1830 por Charles Tanqueray en Londres, su formula exclusiva combina cuatro botanicos seleccionados: enebro, coriandro, angelica y regaliz. Esto le aporta un sabor limpio, herbal y refrescante con 47 grados de alcohol. Imprescindible para preparar el perfecto Gin & Tonic o un Martini clasico.',
+        destacado: true,
+        color: 'bg-green-700',
+        specs: [['Contenido', '750 ml'], ['Alcohol', '47%'], ['Origen', 'Reino Unido'], ['Tipo', 'London Dry Gin'], ['Botanicos', 'Enebro, Coriandro, Angelica, Regaliz']],
+        relacionados: [15, 16, 18, 6],
+      },
+      18: {
+        nombre: 'Ron Bacardi Superior Blanco 750ml',
+        referencia: 'LI-004',
+        categoria: 'Licores Importados',
+        catSlug: 'importados',
+        precio: '$75.000',
+        descCorta: 'Ron blanco cubano de caracter suave, 37.5 grados.',
+        descripcion: 'Bacardi Superior es el ron blanco mas vendido del mundo, nacido en Cuba en 1862. Su proceso de filtracion por carbon lo hace excepcionalmente suave y limpio. Con notas de almendra, limon y vainilla, es la base perfecta para el Mojito, Cuba Libre y Daiquiri. Contenido: 750ml, 37.5 grados de alcohol.',
+        destacado: false,
+        color: 'bg-slate-200',
+        specs: [['Contenido', '750 ml'], ['Alcohol', '37.5%'], ['Origen', 'Puerto Rico'], ['Tipo', 'Ron Blanco'], ['Filtracion', 'Carbon activado']],
+        relacionados: [3, 15, 16, 17],
+      },
+      19: {
+        nombre: 'Gaseosa Coca-Cola 2.5L',
+        referencia: 'BN-001',
+        categoria: 'No Alcoholicas',
+        catSlug: 'no-alcoholicas',
+        precio: '$8.500',
+        descCorta: 'Refresco carbonatado clasico, presentacion familiar 2.5 litros.',
+        descripcion: 'Coca-Cola es la bebida mas reconocida del mundo. Su formula secreta, creada en 1886, produce el inconfundible sabor equilibrado entre dulzura y amargor que acompana cualquier ocasion. Presentacion familiar de 2.5 litros, ideal para compartir. Perfecta para acompañar comidas, fiestas y como mezcla en bebidas con licor.',
+        destacado: false,
+        color: 'bg-red-600',
+        specs: [['Contenido', '2.5 L'], ['Tipo', 'Gaseosa'], ['Origen', 'Colombia'], ['Presentacion', 'Botella PET familiar']],
+        relacionados: [20, 21, 11, 12],
+      },
+      20: {
+        nombre: 'Agua Cristal 600ml x12',
+        referencia: 'BN-002',
+        categoria: 'No Alcoholicas',
+        catSlug: 'no-alcoholicas',
+        precio: '$18.000',
+        descCorta: 'Paquete de 12 botellas de agua purificada sin gas.',
+        descripcion: 'Agua Cristal es la marca de agua mineral mas consumida en Colombia. Su proceso de purificacion garantiza agua limpia, fresca y de alta calidad. Paquete de 12 botellas de 600ml, ideal para eventos, oficinas y consumo diario. Sin gas, sin sabor añadido, hidratacion pura.',
+        destacado: false,
+        color: 'bg-sky-200',
+        specs: [['Contenido', '12 x 600 ml'], ['Tipo', 'Agua Purificada'], ['Gas', 'Sin gas'], ['Origen', 'Colombia']],
+        relacionados: [19, 21, 11, 12],
+      },
+      21: {
+        nombre: 'Jugo Hit Mango 1L x6',
+        referencia: 'BN-003',
+        categoria: 'No Alcoholicas',
+        catSlug: 'no-alcoholicas',
+        precio: '$32.000',
+        descCorta: 'Pack de 6 jugos Hit sabor mango, sin conservantes artificiales.',
+        descripcion: 'Hit Mango es el jugo de frutas mas popular de Colombia, fabricado por Postobón. Con pulpa de mango real y sin conservantes artificiales, ofrece el autentico sabor tropical colombiano. Pack de 6 unidades de 1 litro. Excelente para niños y adultos, ideal para mezclar con licores blancos.',
+        destacado: false,
+        color: 'bg-orange-400',
+        specs: [['Contenido', '6 x 1 L'], ['Tipo', 'Jugo de Fruta'], ['Sabor', 'Mango'], ['Origen', 'Colombia'], ['Conservantes', 'Sin conservantes artificiales']],
+        relacionados: [19, 20, 11, 13],
+      },
+    };
+
+    function buildPlaceholder(colorClass, label) {
+      return `<div class="text-center p-10">
+        <div class="w-32 h-52 ${colorClass} mx-auto rounded-sm opacity-80"></div>
+        <p class="text-gray-400 text-xs mt-3 tracking-wider">${label}</p>
+      </div>`;
+    }
+
+    function buildRelacionados(ids) {
+      const grid = document.getElementById('relacionados');
+      grid.innerHTML = ids.map(id => {
+        const p = PRODUCTOS[id];
+        if (!p) return '';
+        return `<article class="group bg-white border border-gray-100 hover:border-dorado transition-all duration-300 hover:shadow-md">
+          <a href="detalle.html?id=${id}">
+            <div class="aspect-[3/4] bg-gray-50 flex items-center justify-center overflow-hidden">
+              <div class="w-12 h-20 ${p.color} rounded-sm opacity-70"></div>
+            </div>
+            <div class="p-3">
+              <p class="text-dorado text-xs tracking-widest uppercase mb-1">${p.categoria}</p>
+              <h3 class="text-carbon text-xs font-medium leading-snug mb-2 group-hover:text-dorado transition-colors">${p.nombre}</h3>
+              <p class="text-carbon font-semibold text-sm">${p.precio}</p>
+            </div>
+          </a>
+        </article>`;
+      }).join('');
+    }
+
+    function buildSpecs(specs) {
+      const cont = document.getElementById('caracteristicas');
+      cont.innerHTML = specs.map(([label, val]) =>
+        `<div class="flex justify-between py-3 px-4">
+          <span class="text-gris-medio text-xs tracking-widest uppercase">${label}</span>
+          <span class="text-carbon text-xs font-medium">${val}</span>
+        </div>`
+      ).join('');
+    }
+
+    function cargarProducto() {
+      const params = new URLSearchParams(window.location.search);
+      const id = parseInt(params.get('id')) || 1;
+      const p = PRODUCTOS[id];
+      if (!p) return;
+
+      document.getElementById('page-title').textContent = p.nombre + ' — Bodega Premier';
+      document.getElementById('breadcrumb-nombre').textContent = p.nombre;
+      document.getElementById('cat-nombre').textContent = p.categoria;
+      document.getElementById('prod-nombre').textContent = p.nombre;
+      document.getElementById('prod-ref').textContent = 'Referencia: ' + p.referencia;
+      document.getElementById('prod-precio').textContent = p.precio;
+      document.getElementById('prod-desc-corta').textContent = p.descCorta;
+      document.getElementById('prod-descripcion').textContent = p.descripcion;
+      document.getElementById('imagen-producto').innerHTML = buildPlaceholder(p.color, p.referencia);
+
+      if (p.destacado) document.getElementById('badge-destacado').classList.remove('hidden');
+
+      const msg = encodeURIComponent(`Hola, estoy interesado en el producto: ${p.nombre} - ${p.precio}`);
+      document.getElementById('btn-cotizar').href = `https://wa.me/573105514455?text=${msg}`;
+
+      buildSpecs(p.specs);
+      buildRelacionados(p.relacionados);
+    }
+
+    cargarProducto();
+  </script>
+</body>
+</html>
