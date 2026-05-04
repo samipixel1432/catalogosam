@@ -55,25 +55,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 import dj_database_url
 
-DATABASE_URL = os.environ.get('DATABASE_URL')
-
-if DATABASE_URL:
-    # PostgreSQL en Vercel (Neon)
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=DATABASE_URL,
-            conn_max_age=600,
-            ssl_require=True,
-        )
-    }
-else:
-    # SQLite local
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgresql://neondb_owner:npg_inzf72vcyNHa@ep-orange-forest-amna1g9f.c-5.us-east-1.aws.neon.tech/neondb?sslmode=require',
+        conn_max_age=600,
+    )
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
