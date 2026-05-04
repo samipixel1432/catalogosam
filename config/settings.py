@@ -91,3 +91,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 WHATSAPP_NUMBER = '573105514455'
+
+# Vercel: filesystem is read-only, so store sessions in signed cookies (no DB writes)
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
