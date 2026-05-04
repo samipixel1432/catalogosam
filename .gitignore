@@ -5,10 +5,8 @@
 *.pyc
 __pycache__/
 *.pyo
-# db.sqlite3 incluido para Vercel (datos del catálogo)
 *.sqlite3.bak
 media/
-# staticfiles/ se incluye en el repo para Vercel
 .env
 local_settings.py
 
