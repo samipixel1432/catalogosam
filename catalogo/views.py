@@ -7,6 +7,15 @@ from urllib.parse import quote
 from .models import Categoria, Producto
 from .forms import ProductoForm, CategoriaForm
 
+# Vercel: SQLite is read-only. Disconnect the signal that writes last_login
+# to the database on every login — runs at import time, guaranteed to fire.
+try:
+    from django.contrib.auth.signals import user_logged_in
+    from django.contrib.auth.models import update_last_login
+    user_logged_in.disconnect(update_last_login)
+except Exception:
+    pass
+
 
 def es_staff(user):
     return user.is_active and user.is_staff
