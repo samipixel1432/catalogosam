@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html class="dark" lang="es">
 <head>
@@ -8,53 +9,50 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
-    body { background: #121414; color: #e2e2e2; font-family: 'Inter', sans-serif; }
-    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300; vertical-align: middle; }
-    input { background: #1e2020 !important; color: #e2e2e2 !important; border: 1px solid #333535 !important; }
-    input:focus { outline: none; border-color: #d4af37 !important; }
+    body { background:#121414; color:#e2e2e2; font-family:'Inter',sans-serif; }
+    .sg { font-family:'Space Grotesk',sans-serif; }
+    .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 300; vertical-align:middle; }
+    input { background:#1e2020!important; color:#e2e2e2!important; border:1px solid #333535!important; border-radius:0!important; }
+    input:focus { outline:none; border-color:#D4AF37!important; }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center px-4">
-
   <div class="w-full max-w-sm">
-    <!-- Logo -->
-    <div class="text-center mb-10">
-      <p class="text-xs tracking-[0.4em] text-[#d4af37] uppercase font-['Space_Grotesk'] mb-2">Panel de Administración</p>
-      <h1 class="text-4xl font-black tracking-[0.2em] text-white uppercase">PREMIER</h1>
+    <div class="text-center mb-8">
+      <img src="{% static 'img/logo.png' %}" alt="Premier"
+           class="w-24 h-24 object-contain mx-auto mb-4 drop-shadow-[0_0_20px_rgba(212,175,55,0.2)]"/>
+      <p class="sg text-xs text-[#D4AF37] uppercase tracking-[0.4em] mb-1">Panel de Administración</p>
+      <h1 class="text-2xl font-black tracking-[0.15em] text-white uppercase">PREMIER</h1>
     </div>
 
-    <!-- Card -->
     <div class="bg-[#1e2020] border border-[#333535] p-8">
       {% if error %}
-      <div class="flex items-center gap-2 bg-red-900/30 border border-red-800/50 text-red-300 px-4 py-3 mb-6 text-sm font-['Space_Grotesk']">
-        <span class="material-symbols-outlined text-base">error</span>
-        {{ error }}
+      <div class="flex items-center gap-2 bg-red-900/30 border border-red-800/50 text-red-300 px-4 py-3 mb-6 text-sm sg">
+        <span class="material-symbols-outlined text-base">error</span>{{ error }}
       </div>
       {% endif %}
-
       <form method="post" class="flex flex-col gap-5">
         {% csrf_token %}
         <div>
-          <label class="block text-xs tracking-widest uppercase text-[#c5c6ca] font-['Space_Grotesk'] mb-2">Usuario</label>
-          <input type="text" name="username" required autofocus
-                 class="w-full px-4 py-3 text-sm rounded-none"/>
+          <label class="sg block text-[10px] uppercase tracking-widest text-[#c5c6ca] mb-2">Usuario</label>
+          <input type="text" name="username" required autofocus class="w-full px-4 py-3 text-sm"/>
         </div>
         <div>
-          <label class="block text-xs tracking-widest uppercase text-[#c5c6ca] font-['Space_Grotesk'] mb-2">Contraseña</label>
-          <input type="password" name="password" required
-                 class="w-full px-4 py-3 text-sm rounded-none"/>
+          <label class="sg block text-[10px] uppercase tracking-widest text-[#c5c6ca] mb-2">Contraseña</label>
+          <input type="password" name="password" required class="w-full px-4 py-3 text-sm"/>
         </div>
         <button type="submit"
-                class="w-full bg-[#d4af37] text-[#3c2f00] font-bold tracking-widest uppercase py-4 text-sm font-['Space_Grotesk'] hover:bg-[#e9c349] transition-colors mt-2">
+                class="sg w-full bg-[#D4AF37] text-[#1A1200] font-bold tracking-widest uppercase py-4 text-sm hover:bg-[#F2CA50] transition-colors mt-2">
           Ingresar
         </button>
       </form>
     </div>
 
-    <p class="text-center mt-6 text-xs text-[#47494d] font-['Space_Grotesk'] tracking-widest uppercase">
-      <a href="/" class="hover:text-[#d4af37] transition-colors">← Volver al catálogo</a>
+    <p class="text-center mt-6">
+      <a href="/" class="sg text-xs text-[#47494d] hover:text-[#D4AF37] uppercase tracking-widest transition-colors">
+        ← Volver al inicio
+      </a>
     </p>
   </div>
-
 </body>
 </html>

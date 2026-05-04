@@ -3,7 +3,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.conf import settings
-from django.http import Http404
 from urllib.parse import quote
 from .models import Categoria, Producto
 from .forms import ProductoForm, CategoriaForm
@@ -15,19 +14,27 @@ def es_staff(user):
 
 # ── Vistas públicas ──────────────────────────────────────────────────────────
 
-def home(request):
-    categorias = Categoria.objects.prefetch_related('productos').all()
-    destacados = (
-        Producto.objects
-        .select_related('categoria')
-        .filter(disponible=True, destacado=True)[:8]
-    )
-    total_productos = Producto.objects.filter(disponible=True).count()
-    return render(request, 'catalogo/home.html', {
-        'categorias': categorias,
-        'destacados': destacados,
-        'total_productos': total_productos,
-    })
+def landing(request):
+    """Página de inicio / landing principal."""
+    return render(request, 'catalogo/landing.html')
+
+
+def acceso(request):
+    """Página de acceso: botón Invitado + formulario Admin."""
+    if request.user.is_authenticated and request.user.is_staff:
+        return redirect('catalogo:panel_dashboard')
+
+    error = None
+    if request.method == 'POST':
+        username = request.POST.get('username', '').strip()
+        password = request.POST.get('password', '')
+        user = authenticate(request, username=username, password=password)
+        if user and user.is_staff:
+            login(request, user)
+            return redirect('catalogo:panel_dashboard')
+        error = 'Usuario o contraseña incorrectos, o sin permisos de administrador.'
+
+    return render(request, 'catalogo/acceso.html', {'error': error})
 
 
 def coleccion(request):
@@ -35,11 +42,7 @@ def coleccion(request):
     categoria_slug = request.GET.get('categoria', '').strip()
     busqueda = request.GET.get('q', '').strip()
 
-    productos = (
-        Producto.objects
-        .select_related('categoria')
-        .filter(disponible=True)
-    )
+    productos = Producto.objects.select_related('categoria').filter(disponible=True)
 
     categoria_activa = None
     if categoria_slug:
@@ -62,8 +65,7 @@ def coleccion(request):
 def detalle(request, slug):
     producto = get_object_or_404(
         Producto.objects.select_related('categoria'),
-        slug=slug,
-        disponible=True,
+        slug=slug, disponible=True,
     )
     relacionados = (
         Producto.objects
@@ -71,7 +73,6 @@ def detalle(request, slug):
         .exclude(pk=producto.pk)[:4]
     )
 
-    # Mensaje WhatsApp con nombre, precio e imagen (si existe)
     imagen_url = producto.get_imagen_url()
     lineas = [
         f'Hola, me interesa este producto de *Premier Bodega Importadora*:',
@@ -82,11 +83,12 @@ def detalle(request, slug):
     if producto.referencia:
         lineas.append(f'Ref: {producto.referencia}')
     if imagen_url and imagen_url.startswith('http'):
-        lineas.append(f'')
-        lineas.append(f'Imagen: {imagen_url}')
+        lineas += ['', f'Imagen: {imagen_url}']
 
-    mensaje_wa = '\n'.join(lineas)
-    whatsapp_url = f'https://wa.me/{settings.WHATSAPP_NUMBER}?text={quote(mensaje_wa)}'
+    whatsapp_url = (
+        f'https://wa.me/{settings.WHATSAPP_NUMBER}'
+        f'?text={quote(chr(10).join(lineas))}'
+    )
 
     return render(request, 'catalogo/detalle.html', {
         'producto': producto,
@@ -95,43 +97,25 @@ def detalle(request, slug):
     })
 
 
-# ── Panel de administración ──────────────────────────────────────────────────
+# ── Panel admin ──────────────────────────────────────────────────────────────
 
 def panel_login(request):
-    if request.user.is_authenticated and request.user.is_staff:
-        return redirect('catalogo:panel_dashboard')
-
-    error = None
-    if request.method == 'POST':
-        username = request.POST.get('username', '').strip()
-        password = request.POST.get('password', '')
-        user = authenticate(request, username=username, password=password)
-        if user and user.is_staff:
-            login(request, user)
-            return redirect(request.GET.get('next', 'catalogo:panel_dashboard'))
-        error = 'Usuario o contraseña incorrectos, o sin permisos de administrador.'
-
-    return render(request, 'panel/login.html', {'error': error})
+    return redirect('catalogo:acceso')
 
 
 def panel_logout(request):
     logout(request)
-    return redirect('catalogo:home')
+    return redirect('catalogo:landing')
 
 
-@login_required(login_url='catalogo:panel_login')
-@user_passes_test(es_staff, login_url='catalogo:panel_login')
+@login_required(login_url='catalogo:acceso')
+@user_passes_test(es_staff, login_url='catalogo:acceso')
 def panel_dashboard(request):
-    productos = (
-        Producto.objects
-        .select_related('categoria')
-        .order_by('-creado')
-    )
+    productos = Producto.objects.select_related('categoria').order_by('-creado')
     categorias = Categoria.objects.all()
     busqueda = request.GET.get('q', '').strip()
     if busqueda:
         productos = productos.filter(nombre__icontains=busqueda)
-
     return render(request, 'panel/dashboard.html', {
         'productos': productos,
         'categorias': categorias,
@@ -140,8 +124,8 @@ def panel_dashboard(request):
     })
 
 
-@login_required(login_url='catalogo:panel_login')
-@user_passes_test(es_staff, login_url='catalogo:panel_login')
+@login_required(login_url='catalogo:acceso')
+@user_passes_test(es_staff, login_url='catalogo:acceso')
 def panel_producto_nuevo(request):
     form = ProductoForm(request.POST or None, request.FILES or None)
     if request.method == 'POST' and form.is_valid():
@@ -149,14 +133,12 @@ def panel_producto_nuevo(request):
         messages.success(request, 'Producto creado correctamente.')
         return redirect('catalogo:panel_dashboard')
     return render(request, 'panel/producto_form.html', {
-        'form': form,
-        'titulo': 'Nuevo Producto',
-        'accion': 'Crear',
+        'form': form, 'titulo': 'Nuevo Producto', 'accion': 'Crear',
     })
 
 
-@login_required(login_url='catalogo:panel_login')
-@user_passes_test(es_staff, login_url='catalogo:panel_login')
+@login_required(login_url='catalogo:acceso')
+@user_passes_test(es_staff, login_url='catalogo:acceso')
 def panel_producto_editar(request, pk):
     producto = get_object_or_404(Producto, pk=pk)
     form = ProductoForm(request.POST or None, request.FILES or None, instance=producto)
@@ -165,15 +147,13 @@ def panel_producto_editar(request, pk):
         messages.success(request, 'Producto actualizado correctamente.')
         return redirect('catalogo:panel_dashboard')
     return render(request, 'panel/producto_form.html', {
-        'form': form,
-        'producto': producto,
-        'titulo': f'Editar: {producto.nombre}',
-        'accion': 'Guardar cambios',
+        'form': form, 'producto': producto,
+        'titulo': f'Editar: {producto.nombre}', 'accion': 'Guardar cambios',
     })
 
 
-@login_required(login_url='catalogo:panel_login')
-@user_passes_test(es_staff, login_url='catalogo:panel_login')
+@login_required(login_url='catalogo:acceso')
+@user_passes_test(es_staff, login_url='catalogo:acceso')
 def panel_producto_eliminar(request, pk):
     producto = get_object_or_404(Producto, pk=pk)
     if request.method == 'POST':
@@ -184,15 +164,12 @@ def panel_producto_eliminar(request, pk):
     return render(request, 'panel/producto_confirmar_eliminar.html', {'producto': producto})
 
 
-@login_required(login_url='catalogo:panel_login')
-@user_passes_test(es_staff, login_url='catalogo:panel_login')
+@login_required(login_url='catalogo:acceso')
+@user_passes_test(es_staff, login_url='catalogo:acceso')
 def panel_categoria_nueva(request):
     form = CategoriaForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
         form.save()
         messages.success(request, 'Categoría creada.')
         return redirect('catalogo:panel_dashboard')
-    return render(request, 'panel/categoria_form.html', {
-        'form': form,
-        'titulo': 'Nueva Categoría',
-    })
+    return render(request, 'panel/categoria_form.html', {'form': form, 'titulo': 'Nueva Categoría'})

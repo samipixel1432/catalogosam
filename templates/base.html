@@ -14,93 +14,90 @@
       theme: {
         extend: {
           colors: {
-            "on-surface-variant": "#d0c5af",
-            "on-primary": "#3c2f00",
-            "primary-fixed-dim": "#e9c349",
-            "outline": "#99907c",
-            "on-background": "#e2e2e2",
-            "on-primary-container": "#554300",
-            "on-secondary": "#2e3034",
-            "primary-container": "#d4af37",
-            "surface-container": "#1e2020",
-            "on-surface": "#e2e2e2",
-            "tertiary": "#d0cdcd",
-            "surface-container-high": "#282a2b",
-            "surface-container-highest": "#333535",
-            "on-secondary-container": "#b7b8bc",
-            "surface-bright": "#38393a",
-            "primary": "#f2ca50",
-            "surface-variant": "#333535",
-            "surface-container-low": "#1a1c1c",
-            "inverse-surface": "#e2e2e2",
-            "error": "#ffb4ab",
-            "secondary-container": "#47494d",
-            "background": "#121414",
+            "primary":              "#D4AF37",
+            "primary-container":    "#B8960C",
+            "primary-fixed":        "#F2CA50",
+            "primary-fixed-dim":    "#C9A020",
+            "on-primary":           "#1A1200",
+            "on-primary-container": "#FFF0B0",
+            "secondary":            "#c5c6ca",
+            "secondary-container":  "#47494d",
+            "on-secondary":         "#2e3034",
+            "on-secondary-container":"#b7b8bc",
+            "tertiary":             "#d0cdcd",
+            "on-tertiary":          "#313030",
+            "surface":              "#121414",
+            "surface-dim":          "#121414",
+            "surface-bright":       "#38393a",
             "surface-container-lowest": "#0c0f0f",
-            "secondary": "#c5c6ca",
-            "surface": "#121414",
-            "outline-variant": "#4d4635",
-            "surface-dim": "#121414",
-            "dorado": "#d4af37",
+            "surface-container-low":    "#1a1c1c",
+            "surface-container":        "#1e2020",
+            "surface-container-high":   "#282a2b",
+            "surface-container-highest":"#333535",
+            "surface-variant":      "#333535",
+            "on-surface":           "#e2e2e2",
+            "on-surface-variant":   "#d0c5af",
+            "inverse-surface":      "#e2e2e2",
+            "background":           "#121414",
+            "on-background":        "#e2e2e2",
+            "outline":              "#99907c",
+            "outline-variant":      "#4d4635",
+            "error":                "#ffb4ab",
+            "error-container":      "#93000a",
+            "dorado":               "#D4AF37",
           },
           fontFamily: {
-            "body-reg": ["Inter"],
-            "spec-mono": ["Space Grotesk"],
-            "price-lg": ["Space Grotesk"],
+            "body-reg":    ["Inter"],
+            "spec-mono":   ["Space Grotesk"],
+            "price-lg":    ["Space Grotesk"],
             "headline-md": ["Inter"],
-            "display-lg": ["Inter"],
+            "display-lg":  ["Inter"],
           },
           fontSize: {
-            "body-reg": ["16px", { lineHeight: "1.6", letterSpacing: "0", fontWeight: "400" }],
-            "spec-mono": ["13px", { lineHeight: "1.5", letterSpacing: "0.06em", fontWeight: "400" }],
-            "price-lg": ["22px", { lineHeight: "1", letterSpacing: "0", fontWeight: "600" }],
-            "headline-md": ["28px", { lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "700" }],
-            "display-lg": ["52px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "800" }],
+            "body-reg":    ["16px", { lineHeight:"1.6",  letterSpacing:"0",      fontWeight:"400" }],
+            "spec-mono":   ["13px", { lineHeight:"1.5",  letterSpacing:"0.06em", fontWeight:"400" }],
+            "price-lg":    ["22px", { lineHeight:"1",    letterSpacing:"0",      fontWeight:"600" }],
+            "headline-md": ["28px", { lineHeight:"1.2",  letterSpacing:"-0.01em",fontWeight:"700" }],
+            "display-lg":  ["52px", { lineHeight:"1.1",  letterSpacing:"-0.02em",fontWeight:"800" }],
           },
           spacing: {
-            "unit": "4px",
-            "stack-sm": "8px",
-            "stack-lg": "32px",
-            "gutter": "24px",
-            "margin": "48px",
-            "stack-md": "16px",
+            "unit":      "4px",
+            "stack-sm":  "8px",
+            "stack-md":  "16px",
+            "stack-lg":  "32px",
+            "gutter":    "24px",
+            "margin":    "48px",
           },
         },
       },
     }
   </script>
   <style>
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+    .no-scrollbar::-webkit-scrollbar { display:none; }
+    .no-scrollbar { -ms-overflow-style:none; scrollbar-width:none; }
+    .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24; vertical-align:middle; }
   </style>
   {% block extra_head %}{% endblock %}
 </head>
 <body class="bg-background text-on-background font-body-reg text-body-reg min-h-screen flex flex-col pb-20 md:pb-0 pt-[64px]">
 
-  <!-- NAV TOP -->
+  <!-- NAV -->
   <header class="fixed top-0 left-0 right-0 z-50 bg-[#121414]/90 backdrop-blur-xl border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between h-16">
-
-      <a href="{% url 'catalogo:home' %}" class="flex items-center gap-3">
-        <span class="text-lg font-black tracking-[0.25em] text-white uppercase font-headline-md">PREMIER</span>
+      <a href="{% url 'catalogo:landing' %}" class="flex items-center gap-3">
+        <img src="{% static 'img/logo.png' %}" alt="Premier Bodega Importadora" class="h-9 w-auto" />
       </a>
-
       <nav class="hidden md:flex items-center gap-8">
-        <a href="{% url 'catalogo:home' %}"
-           class="font-spec-mono text-spec-mono uppercase tracking-widest transition-colors duration-200 {% if request.resolver_match.url_name == 'home' %}text-dorado{% else %}text-secondary hover:text-on-surface{% endif %}">
-          Inicio
-        </a>
         <a href="{% url 'catalogo:coleccion' %}"
-           class="font-spec-mono text-spec-mono uppercase tracking-widest transition-colors duration-200 {% if request.resolver_match.url_name == 'coleccion' or request.resolver_match.url_name == 'detalle' %}text-dorado{% else %}text-secondary hover:text-on-surface{% endif %}">
+           class="font-spec-mono text-spec-mono uppercase tracking-widest transition-colors
+                  {% if request.resolver_match.url_name == 'coleccion' or request.resolver_match.url_name == 'detalle' %}text-dorado{% else %}text-secondary hover:text-on-surface{% endif %}">
           Catálogo
         </a>
       </nav>
-
       <div class="flex items-center gap-4">
         {% if user.is_staff %}
           <a href="{% url 'catalogo:panel_dashboard' %}"
-             class="hidden md:flex items-center gap-1 font-spec-mono text-spec-mono text-dorado hover:text-primary-fixed-dim uppercase tracking-widest transition-colors">
+             class="hidden md:flex items-center gap-1 font-spec-mono text-spec-mono text-dorado hover:text-primary-fixed uppercase tracking-widest transition-colors">
             <span class="material-symbols-outlined text-base">admin_panel_settings</span>
             Panel
           </a>
@@ -115,50 +112,53 @@
 
   <!-- Modal búsqueda -->
   <div id="busqueda-modal" class="hidden fixed inset-0 z-[60] flex items-start justify-center pt-24 px-4">
-    <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="document.getElementById('busqueda-modal').classList.add('hidden')"></div>
+    <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"
+         onclick="document.getElementById('busqueda-modal').classList.add('hidden')"></div>
     <form action="{% url 'catalogo:coleccion' %}" method="get" class="relative z-10 w-full max-w-lg">
       <div class="flex items-center bg-surface-container border border-outline-variant">
         <input name="q" type="text" placeholder="Buscar productos..." autofocus
-               class="flex-1 bg-transparent text-on-surface placeholder-secondary px-5 py-4 font-body-reg text-body-reg outline-none" />
-        <button type="submit" class="px-5 text-dorado hover:text-primary-fixed-dim transition-colors">
+               class="flex-1 bg-transparent text-on-surface placeholder-secondary px-5 py-4 outline-none" />
+        <button type="submit" class="px-5 text-dorado hover:text-primary-fixed transition-colors">
           <span class="material-symbols-outlined">search</span>
         </button>
       </div>
     </form>
   </div>
 
-  <main class="flex-1">
-    {% block content %}{% endblock %}
-  </main>
+  <main class="flex-1">{% block content %}{% endblock %}</main>
 
   <footer class="hidden md:block border-t border-surface-variant mt-20">
-    <div class="max-w-7xl mx-auto px-8 py-10 flex items-center justify-between">
-      <span class="font-spec-mono text-spec-mono text-secondary uppercase tracking-widest">
-        Premier Bodega Importadora © {% now "Y" %}
-      </span>
-      <a href="https://wa.me/{{ WHATSAPP_NUMBER }}" target="_blank" rel="noopener"
-         class="font-spec-mono text-spec-mono text-dorado hover:text-primary-fixed-dim uppercase tracking-widest transition-colors">
+    <div class="max-w-7xl mx-auto px-8 py-8 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="{% static 'img/logo.png' %}" alt="Premier" class="h-8 w-auto opacity-80" />
+        <span class="font-spec-mono text-spec-mono text-secondary uppercase tracking-widest">
+          © {% now "Y" %}
+        </span>
+      </div>
+      <a href="https://wa.me/573105514455" target="_blank" rel="noopener"
+         class="font-spec-mono text-spec-mono text-dorado hover:text-primary-fixed uppercase tracking-widest transition-colors flex items-center gap-2">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.124.556 4.118 1.528 5.848L0 24l6.318-1.508A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
         WhatsApp
       </a>
     </div>
   </footer>
 
-  <!-- Nav inferior móvil -->
-  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 flex justify-around items-center bg-surface-container-lowest border-t border-surface-variant">
-    <a href="{% url 'catalogo:home' %}"
-       class="flex flex-col items-center py-3 px-4 {% if request.resolver_match.url_name == 'home' %}text-dorado{% else %}text-secondary{% endif %}">
-      <span class="material-symbols-outlined text-2xl">home</span>
+  <!-- Nav móvil -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 flex justify-around bg-surface-container-lowest border-t border-surface-variant">
+    <a href="{% url 'catalogo:landing' %}"
+       class="flex flex-col items-center py-3 px-4 {% if request.resolver_match.url_name == 'landing' %}text-dorado{% else %}text-secondary{% endif %}">
+      <span class="material-symbols-outlined text-xl">home</span>
       <span class="font-spec-mono text-[10px] tracking-widest uppercase mt-0.5">Inicio</span>
     </a>
     <a href="{% url 'catalogo:coleccion' %}"
        class="flex flex-col items-center py-3 px-4 {% if request.resolver_match.url_name == 'coleccion' or request.resolver_match.url_name == 'detalle' %}text-dorado{% else %}text-secondary{% endif %}">
-      <span class="material-symbols-outlined text-2xl">grid_view</span>
+      <span class="material-symbols-outlined text-xl">grid_view</span>
       <span class="font-spec-mono text-[10px] tracking-widest uppercase mt-0.5">Catálogo</span>
     </a>
     {% if user.is_staff %}
     <a href="{% url 'catalogo:panel_dashboard' %}"
        class="flex flex-col items-center py-3 px-4 text-secondary">
-      <span class="material-symbols-outlined text-2xl">admin_panel_settings</span>
+      <span class="material-symbols-outlined text-xl">admin_panel_settings</span>
       <span class="font-spec-mono text-[10px] tracking-widest uppercase mt-0.5">Admin</span>
     </a>
     {% endif %}

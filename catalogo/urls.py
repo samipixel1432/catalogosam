@@ -5,7 +5,8 @@ app_name = 'catalogo'
 
 urlpatterns = [
     # Públicas
-    path('', views.home, name='home'),
+    path('', views.landing, name='landing'),
+    path('acceso/', views.acceso, name='acceso'),
     path('coleccion/', views.coleccion, name='coleccion'),
     path('producto/<slug:slug>/', views.detalle, name='detalle'),
 
