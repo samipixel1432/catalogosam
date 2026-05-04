@@ -1,0 +1,4 @@
+Django==6.0.4
+python-slugify==8.0.4
+Pillow==12.2.0
+whitenoise==6.12.0
