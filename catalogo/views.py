@@ -91,6 +91,8 @@ def detalle(request, slug):
     ]
     if producto.referencia:
         lineas.append(f'Ref: {producto.referencia}')
+    if producto.descripcion_corta:
+        lineas += ['', producto.descripcion_corta]
     if imagen_url and imagen_url.startswith('http'):
         lineas += ['', f'Imagen: {imagen_url}']
 
