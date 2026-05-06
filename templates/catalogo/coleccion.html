@@ -58,50 +58,53 @@
 </section>
 
 <!-- GRID DE PRODUCTOS -->
-<section class="max-w-7xl mx-auto px-4 md:px-8 py-10">
+<section class="max-w-7xl mx-auto px-2 md:px-8 py-6 md:py-10">
   {% if productos %}
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-gutter auto-rows-fr">
+  <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-6 auto-rows-fr">
     {% for producto in productos %}
     <article class="bg-surface-container border border-surface-variant flex flex-col group hover:border-dorado/40 transition-colors duration-300">
       <a href="{{ producto.get_absolute_url }}" class="flex flex-col h-full">
+
         <!-- Imagen -->
         <div class="relative overflow-hidden aspect-square bg-surface-container-high flex-shrink-0">
           {% if producto.get_imagen_url %}
             <img src="{{ producto.get_imagen_url }}" alt="{{ producto.nombre }}"
-                 class="w-full h-full object-cover opacity-90 mix-blend-luminosity group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+                 loading="lazy"
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
           {% else %}
-            <div class="w-full h-full flex flex-col items-center justify-center gap-3 bg-surface-container">
-              <span class="font-headline-md text-4xl text-surface-variant font-black">{{ producto.nombre|first|upper }}</span>
+            <div class="w-full h-full flex flex-col items-center justify-center gap-2 bg-surface-container">
+              <span class="text-3xl md:text-4xl text-surface-variant font-black">{{ producto.nombre|first|upper }}</span>
               {% if producto.categoria %}
-                <span class="font-spec-mono text-spec-mono text-secondary uppercase tracking-widest">{{ producto.categoria.nombre }}</span>
+                <span class="font-spec-mono text-[10px] text-secondary uppercase tracking-widest text-center px-2">{{ producto.categoria.nombre }}</span>
               {% endif %}
             </div>
           {% endif %}
           {% if producto.destacado %}
-          <div class="absolute top-3 left-3 bg-dorado text-on-primary font-spec-mono text-spec-mono uppercase px-2 py-0.5 text-[11px] tracking-widest">
+          <div class="absolute top-2 left-2 bg-dorado text-on-primary font-spec-mono uppercase px-2 py-0.5 text-[9px] md:text-[11px] tracking-widest">
             Destacado
           </div>
           {% endif %}
         </div>
 
         <!-- Info -->
-        <div class="p-4 flex flex-col flex-grow border-t border-surface-variant bg-surface">
+        <div class="p-2 md:p-4 flex flex-col flex-grow border-t border-surface-variant bg-surface">
           {% if producto.categoria %}
-            <p class="font-spec-mono text-spec-mono text-secondary uppercase tracking-widest mb-1">{{ producto.categoria.nombre }}</p>
+            <p class="font-spec-mono text-[9px] md:text-spec-mono text-secondary uppercase tracking-widest mb-0.5 truncate">{{ producto.categoria.nombre }}</p>
           {% endif %}
-          <h2 class="text-on-surface font-semibold leading-snug flex-grow line-clamp-2 group-hover:text-dorado transition-colors">
+          <h2 class="text-on-surface font-semibold text-xs md:text-sm leading-snug flex-grow line-clamp-2 group-hover:text-dorado transition-colors">
             {{ producto.nombre }}
           </h2>
           {% if producto.referencia %}
-            <p class="font-spec-mono text-spec-mono text-secondary uppercase tracking-widest mt-1">Ref: {{ producto.referencia }}</p>
+            <p class="font-spec-mono text-[9px] md:text-spec-mono text-secondary uppercase tracking-widest mt-0.5 hidden md:block">Ref: {{ producto.referencia }}</p>
           {% endif %}
-          <div class="flex items-center justify-between mt-3">
-            <span class="font-price-lg text-price-lg text-dorado">{{ producto.precio_formateado }}</span>
+          <div class="flex items-center justify-between mt-2">
+            <span class="text-dorado font-bold text-sm md:text-base">{{ producto.precio_formateado }}</span>
             <span class="text-secondary group-hover:text-dorado transition-colors">
-              <span class="material-symbols-outlined text-lg">arrow_forward</span>
+              <span class="material-symbols-outlined text-base md:text-lg">arrow_forward</span>
             </span>
           </div>
         </div>
+
       </a>
     </article>
     {% endfor %}
