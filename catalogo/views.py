@@ -5,18 +5,21 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.conf import settings
 from urllib.parse import quote
-from .models import Categoria, Producto
+from .models import Categoria, Producto, ProductoImagen
 from .forms import ProductoForm, CategoriaForm
 
 
-def _guardar_imagen_base64(form, producto):
-    """Si se subió un archivo, conviértelo a base64 y guárdalo en imagen_data."""
-    archivo = form.cleaned_data.get('imagen_archivo')
-    if archivo:
+def _guardar_imagenes_multiples(request, producto):
+    """Guarda todos los archivos enviados como ProductoImagen en base64."""
+    archivos = request.FILES.getlist('imagenes_nuevas')
+    for i, archivo in enumerate(archivos):
         mime = archivo.content_type or 'image/jpeg'
         datos = base64.b64encode(archivo.read()).decode('utf-8')
-        producto.imagen_data = f'data:{mime};base64,{datos}'
-    return producto
+        ProductoImagen.objects.create(
+            producto=producto,
+            imagen_data=f'data:{mime};base64,{datos}',
+            orden=producto.imagenes.count() + i,
+        )
 
 # Vercel: SQLite is read-only. Disconnect the signal that writes last_login
 # to the database on every login — runs at import time, guaranteed to fire.
@@ -151,9 +154,8 @@ def panel_dashboard(request):
 def panel_producto_nuevo(request):
     form = ProductoForm(request.POST or None, request.FILES or None)
     if request.method == 'POST' and form.is_valid():
-        producto = form.save(commit=False)
-        producto = _guardar_imagen_base64(form, producto)
-        producto.save()
+        producto = form.save()
+        _guardar_imagenes_multiples(request, producto)
         messages.success(request, 'Producto creado correctamente.')
         return redirect('catalogo:panel_dashboard')
     return render(request, 'panel/producto_form.html', {
@@ -167,15 +169,25 @@ def panel_producto_editar(request, pk):
     producto = get_object_or_404(Producto, pk=pk)
     form = ProductoForm(request.POST or None, request.FILES or None, instance=producto)
     if request.method == 'POST' and form.is_valid():
-        producto = form.save(commit=False)
-        producto = _guardar_imagen_base64(form, producto)
-        producto.save()
+        producto = form.save()
+        _guardar_imagenes_multiples(request, producto)
         messages.success(request, 'Producto actualizado correctamente.')
         return redirect('catalogo:panel_dashboard')
     return render(request, 'panel/producto_form.html', {
         'form': form, 'producto': producto,
+        'imagenes': producto.imagenes.all(),
         'titulo': f'Editar: {producto.nombre}', 'accion': 'Guardar cambios',
     })
+
+
+@login_required(login_url='catalogo:acceso')
+@user_passes_test(es_staff, login_url='catalogo:acceso')
+def panel_imagen_eliminar(request, pk, img_pk):
+    imagen = get_object_or_404(ProductoImagen, pk=img_pk, producto__pk=pk)
+    if request.method == 'POST':
+        imagen.delete()
+        messages.success(request, 'Imagen eliminada.')
+    return redirect('catalogo:panel_producto_editar', pk=pk)
 
 
 @login_required(login_url='catalogo:acceso')

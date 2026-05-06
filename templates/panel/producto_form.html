@@ -79,33 +79,44 @@
       {% endif %}
     </div>
 
-    <!-- Imagen: subir archivo o URL -->
+    <!-- Fotos del producto -->
     <div class="md:col-span-2">
-      <label class="sg block text-[10px] uppercase tracking-widest text-[#c5c6ca] mb-2">Imagen del producto</label>
+      <label class="sg block text-[10px] uppercase tracking-widest text-[#c5c6ca] mb-3">Fotos del producto</label>
 
-      {% if producto and producto.get_imagen_url %}
-        <div class="mb-3 flex items-center gap-3">
-          <img src="{{ producto.get_imagen_url }}" alt="" class="w-20 h-20 object-cover border border-[#333535]"/>
-          <span class="sg text-xs text-[#c5c6ca] uppercase tracking-widest">Imagen actual</span>
+      <!-- Fotos actuales -->
+      {% if imagenes %}
+      <div class="flex flex-wrap gap-3 mb-4">
+        {% for img in imagenes %}
+        <div class="relative group">
+          <img src="{{ img.imagen_data }}" alt="" class="w-24 h-24 object-contain bg-[#111] border border-[#333535]"/>
+          <form method="post" action="{% url 'catalogo:panel_imagen_eliminar' producto.pk img.pk %}" class="absolute top-1 right-1">
+            {% csrf_token %}
+            <button type="submit" onclick="return confirm('¿Eliminar esta foto?')"
+                    class="bg-red-900/80 text-white w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <span class="material-symbols-outlined text-sm">close</span>
+            </button>
+          </form>
         </div>
+        {% endfor %}
+      </div>
       {% endif %}
 
-      <!-- Subir archivo -->
-      <div class="border border-dashed border-[#333535] hover:border-[#d4af37] transition-colors p-4 cursor-pointer mb-3"
-           onclick="document.getElementById('id_imagen_archivo').click()">
-        <input type="file" name="imagen_archivo" accept="image/*" id="id_imagen_archivo"
-               class="hidden" onchange="mostrarArchivo(this)"/>
+      <!-- Subir nuevas (múltiples) -->
+      <div class="border border-dashed border-[#333535] hover:border-[#d4af37] transition-colors p-5 cursor-pointer"
+           onclick="document.getElementById('id_imagenes_nuevas').click()">
+        <input type="file" name="imagenes_nuevas" accept="image/*" id="id_imagenes_nuevas"
+               multiple class="hidden" onchange="mostrarArchivos(this)"/>
         <div class="flex items-center gap-3">
-          <span class="material-symbols-outlined text-2xl text-[#47494d]">upload_file</span>
+          <span class="material-symbols-outlined text-3xl text-[#47494d]">add_photo_alternate</span>
           <div>
-            <p id="nombre-archivo" class="sg text-xs text-[#c5c6ca] uppercase tracking-widest">Subir imagen desde tu dispositivo</p>
-            <p class="sg text-[11px] text-[#47494d] uppercase tracking-widest mt-0.5">JPG, PNG, WEBP — se guarda en la base de datos</p>
+            <p id="lista-archivos" class="sg text-xs text-[#c5c6ca] uppercase tracking-widest">Subir fotos (puedes seleccionar varias)</p>
+            <p class="sg text-[11px] text-[#47494d] uppercase tracking-widest mt-0.5">JPG, PNG, WEBP — se guardan en la base de datos</p>
           </div>
         </div>
       </div>
 
       <!-- O URL -->
-      <p class="sg text-[10px] text-[#47494d] uppercase tracking-widest text-center mb-2">— o pegar URL —</p>
+      <p class="sg text-[10px] text-[#47494d] uppercase tracking-widest text-center my-3">— o pegar URL de imagen —</p>
       {{ form.imagen_url }}
       {% if form.imagen_url.errors %}
         <p class="sg text-xs text-red-400 mt-1">{{ form.imagen_url.errors.0 }}</p>
@@ -149,10 +160,11 @@
 </form>
 
 <script>
-  function mostrarArchivo(input) {
-    const label = document.getElementById('nombre-archivo');
-    if (input.files && input.files[0]) {
-      label.textContent = '✓ ' + input.files[0].name;
+  function mostrarArchivos(input) {
+    const label = document.getElementById('lista-archivos');
+    if (input.files && input.files.length > 0) {
+      const nombres = Array.from(input.files).map(f => f.name).join(', ');
+      label.textContent = '✓ ' + input.files.length + ' foto(s): ' + nombres;
       label.style.color = '#d4af37';
     }
   }

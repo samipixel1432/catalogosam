@@ -78,8 +78,12 @@ class Producto(models.Model):
         return f'${self.precio:,.0f}'.replace(',', '.')
 
     def get_imagen_url(self):
+        # Prioridad: imagen subida al panel → imagen_url → imagen FileField
+        primera = self.imagenes.first()
+        if primera:
+            return primera.imagen_data
         if self.imagen_data:
-            return self.imagen_data  # ya viene como data:image/...;base64,...
+            return self.imagen_data
         if self.imagen:
             return self.imagen.url
         if self.imagen_url:
@@ -88,3 +92,17 @@ class Producto(models.Model):
 
     def __str__(self):
         return self.nombre
+
+
+class ProductoImagen(models.Model):
+    """Imágenes adicionales por producto (guardadas en DB como base64)."""
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE, related_name='imagenes')
+    imagen_data = models.TextField()
+    orden = models.PositiveSmallIntegerField(default=0)
+    creado = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['orden', 'creado']
+
+    def __str__(self):
+        return f'Imagen {self.pk} — {self.producto.nombre}'
