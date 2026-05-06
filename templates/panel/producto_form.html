@@ -16,7 +16,7 @@
   </div>
 </div>
 
-<form method="post" enctype="multipart/form-data" class="max-w-3xl">
+<form method="post" class="max-w-3xl">
   {% csrf_token %}
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -79,37 +79,18 @@
       {% endif %}
     </div>
 
-    <!-- Imagen upload -->
-    <div>
-      <label class="sg block text-[10px] uppercase tracking-widest text-[#c5c6ca] mb-2">Imagen (subir archivo)</label>
+    <!-- URL de imagen -->
+    <div class="md:col-span-2">
+      <label class="sg block text-[10px] uppercase tracking-widest text-[#c5c6ca] mb-2">URL de imagen</label>
       {% if producto and producto.get_imagen_url %}
         <div class="mb-3 flex items-center gap-3">
           <img src="{{ producto.get_imagen_url }}" alt="" class="w-20 h-20 object-cover border border-[#333535]"/>
           <span class="sg text-xs text-[#c5c6ca] uppercase tracking-widest">Imagen actual</span>
         </div>
       {% endif %}
-      <div class="border border-dashed border-[#333535] hover:border-[#d4af37] transition-colors p-4 cursor-pointer"
-           onclick="document.getElementById('id_imagen').click()">
-        <input type="file" name="imagen" accept="image/*" id="id_imagen"
-               class="hidden" onchange="mostrarNombreArchivo(this)"/>
-        <div class="flex flex-col items-center gap-2 text-center">
-          <span class="material-symbols-outlined text-3xl text-[#47494d]">upload_file</span>
-          <span id="nombre-archivo" class="sg text-xs text-[#c5c6ca] uppercase tracking-widest">
-            Haz clic para seleccionar imagen
-          </span>
-        </div>
-      </div>
-      {% if form.imagen.errors %}
-        <p class="sg text-xs text-red-400 mt-1">{{ form.imagen.errors.0 }}</p>
-      {% endif %}
-    </div>
-
-    <!-- URL de imagen externa -->
-    <div>
-      <label class="sg block text-[10px] uppercase tracking-widest text-[#c5c6ca] mb-2">O pegar URL de imagen externa</label>
       {{ form.imagen_url }}
       <p class="sg text-[11px] text-[#47494d] mt-1 uppercase tracking-widest">
-        Si subes archivo, tiene prioridad sobre la URL
+        Pega el link directo de la imagen (desde Google Fotos, ImgBB, etc.)
       </p>
       {% if form.imagen_url.errors %}
         <p class="sg text-xs text-red-400 mt-1">{{ form.imagen_url.errors.0 }}</p>

@@ -8,7 +8,7 @@ class ProductoForm(forms.ModelForm):
         fields = [
             'nombre', 'referencia', 'categoria',
             'descripcion_corta', 'descripcion',
-            'precio', 'imagen', 'imagen_url',
+            'precio', 'imagen_url',
             'disponible', 'destacado',
         ]
         widgets = {
