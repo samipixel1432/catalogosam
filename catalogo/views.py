@@ -1,3 +1,4 @@
+import base64
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -6,6 +7,16 @@ from django.conf import settings
 from urllib.parse import quote
 from .models import Categoria, Producto
 from .forms import ProductoForm, CategoriaForm
+
+
+def _guardar_imagen_base64(form, producto):
+    """Si se subió un archivo, conviértelo a base64 y guárdalo en imagen_data."""
+    archivo = form.cleaned_data.get('imagen_archivo')
+    if archivo:
+        mime = archivo.content_type or 'image/jpeg'
+        datos = base64.b64encode(archivo.read()).decode('utf-8')
+        producto.imagen_data = f'data:{mime};base64,{datos}'
+    return producto
 
 # Vercel: SQLite is read-only. Disconnect the signal that writes last_login
 # to the database on every login — runs at import time, guaranteed to fire.
@@ -140,7 +151,9 @@ def panel_dashboard(request):
 def panel_producto_nuevo(request):
     form = ProductoForm(request.POST or None, request.FILES or None)
     if request.method == 'POST' and form.is_valid():
-        form.save()
+        producto = form.save(commit=False)
+        producto = _guardar_imagen_base64(form, producto)
+        producto.save()
         messages.success(request, 'Producto creado correctamente.')
         return redirect('catalogo:panel_dashboard')
     return render(request, 'panel/producto_form.html', {
@@ -154,7 +167,9 @@ def panel_producto_editar(request, pk):
     producto = get_object_or_404(Producto, pk=pk)
     form = ProductoForm(request.POST or None, request.FILES or None, instance=producto)
     if request.method == 'POST' and form.is_valid():
-        form.save()
+        producto = form.save(commit=False)
+        producto = _guardar_imagen_base64(form, producto)
+        producto.save()
         messages.success(request, 'Producto actualizado correctamente.')
         return redirect('catalogo:panel_dashboard')
     return render(request, 'panel/producto_form.html', {

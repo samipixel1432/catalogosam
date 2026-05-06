@@ -16,7 +16,7 @@
   </div>
 </div>
 
-<form method="post" class="max-w-3xl">
+<form method="post" enctype="multipart/form-data" class="max-w-3xl">
   {% csrf_token %}
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -79,19 +79,34 @@
       {% endif %}
     </div>
 
-    <!-- URL de imagen -->
+    <!-- Imagen: subir archivo o URL -->
     <div class="md:col-span-2">
-      <label class="sg block text-[10px] uppercase tracking-widest text-[#c5c6ca] mb-2">URL de imagen</label>
+      <label class="sg block text-[10px] uppercase tracking-widest text-[#c5c6ca] mb-2">Imagen del producto</label>
+
       {% if producto and producto.get_imagen_url %}
         <div class="mb-3 flex items-center gap-3">
           <img src="{{ producto.get_imagen_url }}" alt="" class="w-20 h-20 object-cover border border-[#333535]"/>
           <span class="sg text-xs text-[#c5c6ca] uppercase tracking-widest">Imagen actual</span>
         </div>
       {% endif %}
+
+      <!-- Subir archivo -->
+      <div class="border border-dashed border-[#333535] hover:border-[#d4af37] transition-colors p-4 cursor-pointer mb-3"
+           onclick="document.getElementById('id_imagen_archivo').click()">
+        <input type="file" name="imagen_archivo" accept="image/*" id="id_imagen_archivo"
+               class="hidden" onchange="mostrarArchivo(this)"/>
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-2xl text-[#47494d]">upload_file</span>
+          <div>
+            <p id="nombre-archivo" class="sg text-xs text-[#c5c6ca] uppercase tracking-widest">Subir imagen desde tu dispositivo</p>
+            <p class="sg text-[11px] text-[#47494d] uppercase tracking-widest mt-0.5">JPG, PNG, WEBP — se guarda en la base de datos</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- O URL -->
+      <p class="sg text-[10px] text-[#47494d] uppercase tracking-widest text-center mb-2">— o pegar URL —</p>
       {{ form.imagen_url }}
-      <p class="sg text-[11px] text-[#47494d] mt-1 uppercase tracking-widest">
-        Pega el link directo de la imagen (desde Google Fotos, ImgBB, etc.)
-      </p>
       {% if form.imagen_url.errors %}
         <p class="sg text-xs text-red-400 mt-1">{{ form.imagen_url.errors.0 }}</p>
       {% endif %}
@@ -134,10 +149,11 @@
 </form>
 
 <script>
-  function mostrarNombreArchivo(input) {
+  function mostrarArchivo(input) {
     const label = document.getElementById('nombre-archivo');
     if (input.files && input.files[0]) {
-      label.textContent = input.files[0].name;
+      label.textContent = '✓ ' + input.files[0].name;
+      label.style.color = '#d4af37';
     }
   }
   /* Aplicar estilos inline a los widgets de Django */

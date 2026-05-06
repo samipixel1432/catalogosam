@@ -42,6 +42,7 @@ class Producto(models.Model):
     precio = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
     imagen = models.ImageField(upload_to='productos/', blank=True, null=True)
     imagen_url = models.URLField(max_length=600, blank=True)
+    imagen_data = models.TextField(blank=True)  # base64 para guardar en DB (funciona en Vercel)
     disponible = models.BooleanField(default=True)
     destacado = models.BooleanField(default=False)
     creado = models.DateTimeField(auto_now_add=True)
@@ -77,6 +78,8 @@ class Producto(models.Model):
         return f'${self.precio:,.0f}'.replace(',', '.')
 
     def get_imagen_url(self):
+        if self.imagen_data:
+            return self.imagen_data  # ya viene como data:image/...;base64,...
         if self.imagen:
             return self.imagen.url
         if self.imagen_url:

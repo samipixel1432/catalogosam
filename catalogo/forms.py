@@ -3,6 +3,9 @@ from .models import Producto, Categoria
 
 
 class ProductoForm(forms.ModelForm):
+    # Campo extra para subir imagen — se convierte a base64 en la vista
+    imagen_archivo = forms.ImageField(required=False, label='Subir imagen')
+
     class Meta:
         model = Producto
         fields = [
