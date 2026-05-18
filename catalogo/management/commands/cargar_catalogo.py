@@ -1,9 +1,10 @@
 import base64
 import os
+from pathlib import Path
 from django.core.management.base import BaseCommand
 from catalogo.models import Categoria, Producto, ProductoImagen
 
-IMGS_DIR = '/tmp/catalogo_imgs2/Catalogoso'
+IMGS_DIR = Path(__file__).resolve().parent.parent.parent.parent / 'datos' / 'imagenes'
 
 CATEGORIAS = [
     ('Cocina y Electrodomésticos', 1),
