@@ -83,38 +83,38 @@
   <style>
     /* ── Tema claro (por defecto) ── */
     :root {
-      --primary:              #D4AF37;
+      --primary:              #C9A020;
       --primary-container:    #FFF0B0;
-      --primary-fixed:        #F2CA50;
-      --primary-fixed-dim:    #C9A020;
+      --primary-fixed:        #E8C030;
+      --primary-fixed-dim:    #B8900A;
       --on-primary:           #1A1200;
       --on-primary-container: #3A2E00;
-      --secondary:            #5C5D61;
-      --secondary-container:  #E1E2E7;
+      --secondary:            #3E3C36;
+      --secondary-container:  #D4D0C8;
       --on-secondary:         #FFFFFF;
-      --on-secondary-container:#191C20;
-      --tertiary:             #5C5A5A;
+      --on-secondary-container:#1A1810;
+      --tertiary:             #3E3C3A;
       --on-tertiary:          #FFFFFF;
-      --surface:              #F9F9F4;
-      --surface-dim:          #D9D9D5;
-      --surface-bright:       #FFFFFF;
-      --surface-container-lowest: #FFFFFF;
-      --surface-container-low:    #F3F3EE;
-      --surface-container:        #EDEDEA;
-      --surface-container-high:   #E7E7E4;
-      --surface-container-highest:#E2E2DF;
-      --surface-variant:      #E0DDD5;
-      --on-surface:           #1A1A18;
-      --on-surface-variant:   #4A4640;
-      --inverse-surface:      #2E2E2B;
-      --background:           #F9F9F4;
-      --on-background:        #1A1A18;
-      --outline:              #7A7772;
-      --outline-variant:      #CAC5BC;
+      --surface:              #F5F2EA;
+      --surface-dim:          #CCC9C0;
+      --surface-bright:       #FDFCF8;
+      --surface-container-lowest: #FDFCF8;
+      --surface-container-low:    #EDE9DF;
+      --surface-container:        #E2DDD2;
+      --surface-container-high:   #D6D1C6;
+      --surface-container-highest:#CAC5BA;
+      --surface-variant:      #B8B4AA;
+      --on-surface:           #0C0C0A;
+      --on-surface-variant:   #34322C;
+      --inverse-surface:      #28261E;
+      --background:           #E8E4D8;
+      --on-background:        #0C0C0A;
+      --outline:              #605D56;
+      --outline-variant:      #9A968E;
       --error:                #BA1A1A;
       --error-container:      #FFDAd6;
-      --nav-bg:               rgba(249,249,244,0.92);
-      --img-bg:               #F0F0EC;
+      --nav-bg:               rgba(232,228,216,0.94);
+      --img-bg:               #DDD9CE;
     }
 
     /* ── Tema oscuro ── */
@@ -140,11 +140,11 @@
       --surface-container-high:   #282a2b;
       --surface-container-highest:#333535;
       --surface-variant:      #333535;
-      --on-surface:           #c8c4bc;
-      --on-surface-variant:   #b8ad9a;
-      --inverse-surface:      #c8c4bc;
+      --on-surface:           #b8b4ac;
+      --on-surface-variant:   #a89e8c;
+      --inverse-surface:      #b8b4ac;
       --background:           #121414;
-      --on-background:        #c8c4bc;
+      --on-background:        #b8b4ac;
       --outline:              #99907c;
       --outline-variant:      #4d4635;
       --error:                #ffb4ab;
@@ -164,7 +164,7 @@
 <body class="bg-background text-on-background font-body-reg text-body-reg min-h-screen flex flex-col pb-20 md:pb-0 pt-[64px] transition-colors duration-200">
 
   <!-- NAV -->
-  <header class="fixed top-0 left-0 right-0 z-50 nav-glass border-b border-outline-variant/30">
+  <header class="fixed top-0 left-0 right-0 z-50 nav-glass border-b border-outline-variant">
     <div class="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between h-16">
       <a href="{% url 'catalogo:landing' %}" class="flex items-center gap-3">
         <img src="{% static 'img/logo.png' %}" alt="Premier Bodega Importadora" class="h-9 w-auto" />
