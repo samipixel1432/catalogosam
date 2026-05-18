@@ -28,32 +28,16 @@
   </div>
 </section>
 
-<!-- FILTROS Y BÚSQUEDA -->
+<!-- BÚSQUEDA -->
 <section class="border-b border-surface-variant bg-surface py-4 px-4 md:px-8 sticky top-[64px] z-40 backdrop-blur-md">
-  <div class="max-w-7xl mx-auto flex items-center gap-4 overflow-x-auto no-scrollbar">
-    <!-- Búsqueda -->
-    <form action="{% url 'catalogo:coleccion' %}" method="get" class="flex items-center bg-surface-container border border-outline-variant min-w-[200px] flex-shrink-0">
+  <div class="max-w-7xl mx-auto">
+    <form action="{% url 'catalogo:coleccion' %}" method="get" class="flex items-center bg-surface-container border border-outline-variant max-w-sm">
       <input name="q" type="text" value="{{ busqueda }}" placeholder="Buscar..."
-             class="bg-transparent text-on-surface placeholder-secondary px-4 py-2.5 font-spec-mono text-spec-mono outline-none w-40 md:w-56" />
-      {% if categoria_activa %}<input type="hidden" name="categoria" value="{{ categoria_activa.slug }}">{% endif %}
+             class="bg-transparent text-on-surface placeholder-secondary px-4 py-2.5 font-spec-mono text-spec-mono outline-none w-full" />
       <button type="submit" class="px-3 text-secondary hover:text-dorado transition-colors">
         <span class="material-symbols-outlined text-lg">search</span>
       </button>
     </form>
-
-    <!-- Categorías -->
-    <a href="{% url 'catalogo:coleccion' %}{% if busqueda %}?q={{ busqueda }}{% endif %}"
-       class="font-spec-mono text-spec-mono uppercase tracking-widest px-4 py-2.5 border whitespace-nowrap flex-shrink-0 transition-colors
-              {% if not categoria_activa %}border-dorado text-dorado{% else %}border-outline-variant text-secondary hover:border-dorado hover:text-dorado{% endif %}">
-      Todos
-    </a>
-    {% for cat in categorias %}
-    <a href="{{ cat.get_absolute_url }}{% if busqueda %}&q={{ busqueda }}{% endif %}"
-       class="font-spec-mono text-spec-mono uppercase tracking-widest px-4 py-2.5 border whitespace-nowrap flex-shrink-0 transition-colors
-              {% if categoria_activa.slug == cat.slug %}border-dorado text-dorado{% else %}border-outline-variant text-secondary hover:border-dorado hover:text-dorado{% endif %}">
-      {{ cat.nombre }}
-    </a>
-    {% endfor %}
   </div>
 </section>
 
