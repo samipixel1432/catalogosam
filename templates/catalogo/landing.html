@@ -76,6 +76,7 @@
       --nav-bg:               rgba(249,249,244,0.92);
       --hero-bg:              #F3F3EE;
       --card-border:          rgba(0,0,0,0.08);
+      --grid-opacity:         0.09;
     }
     .dark {
       --primary:              #D4AF37;
@@ -100,6 +101,7 @@
       --nav-bg:               rgba(18,20,20,0.92);
       --hero-bg:              #0c0f0f;
       --card-border:          rgba(255,255,255,0.05);
+      --grid-opacity:         0.035;
     }
     .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24;vertical-align:middle;}
     .pb-safe{padding-bottom:env(safe-area-inset-bottom);}
@@ -142,8 +144,8 @@
       <div class="w-[700px] h-[700px] bg-dorado/8 rounded-full blur-[120px] pointer-events-none"></div>
     </div>
     <!-- Patrón grid sutil -->
-    <div class="absolute inset-0 opacity-[0.04] pointer-events-none"
-         style="background-image:linear-gradient(to right,#D4AF37 1px,transparent 1px),linear-gradient(to bottom,#D4AF37 1px,transparent 1px);background-size:40px 40px;"></div>
+    <div class="absolute inset-0 pointer-events-none"
+         style="opacity:var(--grid-opacity);background-image:linear-gradient(to right,#D4AF37 1px,transparent 1px),linear-gradient(to bottom,#D4AF37 1px,transparent 1px);background-size:40px 40px;"></div>
 
     <div class="relative z-10 flex flex-col items-center text-center px-6 max-w-4xl mx-auto pt-24 pb-16">
 
@@ -267,10 +269,6 @@
       <span class="font-spec-mono text-spec-mono text-secondary uppercase tracking-widest text-xs">
         Premier Bodega Importadora © {% now "Y" %}
       </span>
-      <a href="{% url 'catalogo:acceso' %}"
-         class="font-spec-mono text-spec-mono text-secondary hover:text-dorado uppercase tracking-widest text-xs transition-colors">
-        Admin
-      </a>
     </div>
   </footer>
 
