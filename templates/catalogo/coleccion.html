@@ -5,6 +5,9 @@
   {% if categoria_activa %}{{ categoria_activa.nombre }} — {% endif %}Catálogo — Premier
 {% endblock %}
 
+{% block og_title %}{% if categoria_activa %}{{ categoria_activa.nombre }} — {% endif %}Catálogo — Premier Bodega Importadora{% endblock %}
+{% block og_description %}Explorá nuestra colección completa de productos importados: electrónica, hogar, accesorios y más. ¡Consultanos por WhatsApp!{% endblock %}
+
 {% block content %}
 
 <!-- ENCABEZADO -->
