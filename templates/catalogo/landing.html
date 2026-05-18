@@ -1,7 +1,14 @@
 {% load static %}
 <!DOCTYPE html>
-<html class="dark" lang="es">
+<html lang="es">
 <head>
+  <script>
+    (function(){
+      var t=localStorage.getItem('premier-tema');
+      var dark=t==='oscuro'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.classList.toggle('dark',dark);
+    })();
+  </script>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Premier Bodega Importadora</title>
@@ -13,16 +20,26 @@
       darkMode:"class",
       theme:{ extend:{
         colors:{
-          "primary":"#D4AF37","primary-fixed":"#F2CA50","primary-fixed-dim":"#C9A020",
-          "on-primary":"#1A1200","primary-container":"#B8960C",
-          "secondary":"#c5c6ca","on-secondary":"#2e3034",
-          "surface":"#121414","surface-container":"#1e2020",
-          "surface-container-high":"#282a2b","surface-container-highest":"#333535",
-          "surface-container-lowest":"#0c0f0f","surface-container-low":"#1a1c1c",
-          "surface-variant":"#333535","on-surface":"#e2e2e2",
-          "on-surface-variant":"#d0c5af","background":"#121414",
-          "outline":"#99907c","outline-variant":"#4d4635",
-          "dorado":"#D4AF37",
+          "primary":              "var(--primary)",
+          "primary-container":    "var(--primary-container)",
+          "primary-fixed":        "var(--primary-fixed)",
+          "primary-fixed-dim":    "var(--primary-fixed-dim)",
+          "on-primary":           "var(--on-primary)",
+          "secondary":            "var(--secondary)",
+          "surface":              "var(--surface)",
+          "surface-container":    "var(--surface-container)",
+          "surface-container-high":   "var(--surface-container-high)",
+          "surface-container-highest":"var(--surface-container-highest)",
+          "surface-container-lowest": "var(--surface-container-lowest)",
+          "surface-container-low":    "var(--surface-container-low)",
+          "surface-variant":      "var(--surface-variant)",
+          "on-surface":           "var(--on-surface)",
+          "on-surface-variant":   "var(--on-surface-variant)",
+          "background":           "var(--background)",
+          "on-background":        "var(--on-background)",
+          "outline":              "var(--outline)",
+          "outline-variant":      "var(--outline-variant)",
+          "dorado":               "#D4AF37",
         },
         fontFamily:{ "body-reg":["Inter"],"spec-mono":["Space Grotesk"],"headline-md":["Inter"],"display-lg":["Inter"] },
         fontSize:{
@@ -36,24 +53,80 @@
     }
   </script>
   <style>
+    :root {
+      --primary:              #D4AF37;
+      --primary-container:    #FFF0B0;
+      --primary-fixed:        #F2CA50;
+      --primary-fixed-dim:    #C9A020;
+      --on-primary:           #1A1200;
+      --secondary:            #5C5D61;
+      --surface:              #F9F9F4;
+      --surface-container-lowest: #FFFFFF;
+      --surface-container-low:    #F3F3EE;
+      --surface-container:        #EDEDEA;
+      --surface-container-high:   #E7E7E4;
+      --surface-container-highest:#E2E2DF;
+      --surface-variant:      #E0DDD5;
+      --on-surface:           #1A1A18;
+      --on-surface-variant:   #4A4640;
+      --background:           #F9F9F4;
+      --on-background:        #1A1A18;
+      --outline:              #7A7772;
+      --outline-variant:      #CAC5BC;
+      --nav-bg:               rgba(249,249,244,0.92);
+      --hero-bg:              #F3F3EE;
+      --card-border:          rgba(0,0,0,0.08);
+    }
+    .dark {
+      --primary:              #D4AF37;
+      --primary-container:    #B8960C;
+      --primary-fixed:        #F2CA50;
+      --primary-fixed-dim:    #C9A020;
+      --on-primary:           #1A1200;
+      --secondary:            #c5c6ca;
+      --surface:              #121414;
+      --surface-container-lowest: #0c0f0f;
+      --surface-container-low:    #1a1c1c;
+      --surface-container:        #1e2020;
+      --surface-container-high:   #282a2b;
+      --surface-container-highest:#333535;
+      --surface-variant:      #333535;
+      --on-surface:           #e2e2e2;
+      --on-surface-variant:   #d0c5af;
+      --background:           #121414;
+      --on-background:        #e2e2e2;
+      --outline:              #99907c;
+      --outline-variant:      #4d4635;
+      --nav-bg:               rgba(18,20,20,0.92);
+      --hero-bg:              #0c0f0f;
+      --card-border:          rgba(255,255,255,0.05);
+    }
     .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24;vertical-align:middle;}
     .pb-safe{padding-bottom:env(safe-area-inset-bottom);}
     @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
     .fade-up{animation:fadeUp .8s ease forwards;}
     .fade-up-2{animation:fadeUp .8s .2s ease both;}
     .fade-up-3{animation:fadeUp .8s .4s ease both;}
+    .nav-glass{background-color:var(--nav-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);}
+    .hero-bg{background-color:var(--hero-bg);}
+    .card-border{border-color:var(--card-border);}
   </style>
 </head>
-<body class="bg-background text-on-background font-body-reg min-h-screen flex flex-col overflow-x-hidden">
+<body class="bg-background text-on-background font-body-reg min-h-screen flex flex-col overflow-x-hidden transition-colors duration-200">
 
   <!-- NAV -->
-  <header class="fixed top-0 w-full z-50 bg-[#0c0f0f]/80 backdrop-blur-xl border-b border-white/10 flex items-center justify-between px-6 h-16">
+  <header class="fixed top-0 w-full z-50 nav-glass border-b border-outline-variant/30 flex items-center justify-between px-6 h-16">
     <img src="{% static 'img/logo.png' %}" alt="Premier" class="h-9 w-auto"/>
     <div class="flex items-center gap-4">
       <a href="{% url 'catalogo:coleccion' %}"
          class="hidden md:block font-spec-mono text-spec-mono text-secondary hover:text-dorado uppercase tracking-widest transition-colors">
         Catálogo
       </a>
+      <!-- Toggle tema -->
+      <button id="theme-toggle" onclick="toggleTema()" title="Cambiar tema"
+              class="text-secondary hover:text-dorado transition-colors">
+        <span id="theme-icon" class="material-symbols-outlined text-xl">light_mode</span>
+      </button>
       <a href="{% url 'catalogo:acceso' %}"
          class="font-spec-mono text-spec-mono text-dorado hover:text-primary-fixed uppercase tracking-widest transition-colors flex items-center gap-1">
         <span class="material-symbols-outlined text-base">login</span>
@@ -64,44 +137,36 @@
 
   <!-- HERO FULL-HEIGHT -->
   <section class="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
-
-    <!-- Fondo oscuro con gradiente dorado sutil -->
-    <div class="absolute inset-0 bg-[#0c0f0f]"></div>
+    <div class="absolute inset-0 hero-bg transition-colors duration-200"></div>
     <div class="absolute inset-0 flex items-center justify-center">
       <div class="w-[700px] h-[700px] bg-dorado/8 rounded-full blur-[120px] pointer-events-none"></div>
     </div>
-    <!-- Patrón grid -->
+    <!-- Patrón grid sutil -->
     <div class="absolute inset-0 opacity-[0.04] pointer-events-none"
          style="background-image:linear-gradient(to right,#D4AF37 1px,transparent 1px),linear-gradient(to bottom,#D4AF37 1px,transparent 1px);background-size:40px 40px;"></div>
 
-    <!-- Contenido centrado -->
     <div class="relative z-10 flex flex-col items-center text-center px-6 max-w-4xl mx-auto pt-24 pb-16">
 
-      <!-- Logo grande -->
       <div class="mb-8 fade-up">
         <img src="{% static 'img/logo.png' %}" alt="Premier Bodega Importadora"
              class="w-40 h-40 md:w-52 md:h-52 object-contain mx-auto drop-shadow-[0_0_40px_rgba(212,175,55,0.3)]"/>
       </div>
 
-      <!-- Badge -->
       <div class="mb-6 fade-up-2">
         <span class="font-spec-mono text-spec-mono text-dorado uppercase tracking-[0.3em] border border-dorado/30 px-4 py-1.5 bg-dorado/5">
           Importadora &amp; Distribuidora
         </span>
       </div>
 
-      <!-- Título -->
       <h1 class="font-display-lg text-display-lg text-on-surface uppercase leading-tight mb-6 fade-up-2">
         Catálogo<br><span class="text-dorado">Premier</span>
       </h1>
 
-      <!-- Subtítulo -->
       <p class="font-body-reg text-body-reg text-on-surface-variant max-w-xl mb-10 fade-up-3">
         Productos de calidad para el hogar, belleza, cocina y más.<br>
         Precios directos de bodega. Atención personalizada.
       </p>
 
-      <!-- CTAs -->
       <div class="flex flex-col sm:flex-row gap-4 w-full max-w-sm fade-up-3">
         <a href="{% url 'catalogo:coleccion' %}"
            class="flex-1 flex items-center justify-center gap-2 bg-dorado text-on-primary font-spec-mono text-spec-mono font-bold uppercase tracking-widest py-4 px-6 hover:bg-primary-fixed transition-colors">
@@ -115,7 +180,6 @@
         </a>
       </div>
 
-      <!-- Flecha abajo -->
       <a href="#standard" class="mt-16 text-secondary hover:text-dorado transition-colors animate-bounce fade-up-3">
         <span class="material-symbols-outlined text-3xl">keyboard_arrow_down</span>
       </a>
@@ -133,9 +197,8 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
 
-      <!-- Card 1 -->
       <div class="bg-surface border border-surface-container-high p-6 flex flex-col group hover:border-dorado/40 transition-colors">
-        <div class="w-12 h-12 bg-surface-container flex items-center justify-center mb-stack-lg border border-white/5 group-hover:border-dorado/40 transition-colors">
+        <div class="w-12 h-12 bg-surface-container flex items-center justify-center mb-stack-lg border card-border group-hover:border-dorado/40 transition-colors">
           <span class="material-symbols-outlined text-dorado">verified</span>
         </div>
         <h3 class="text-on-surface font-bold uppercase mb-stack-sm tracking-wide">Calidad Garantizada</h3>
@@ -148,9 +211,8 @@
         </div>
       </div>
 
-      <!-- Card 2 -->
       <div class="bg-surface border border-surface-container-high p-6 flex flex-col group hover:border-dorado/40 transition-colors">
-        <div class="w-12 h-12 bg-surface-container flex items-center justify-center mb-stack-lg border border-white/5 group-hover:border-dorado/40 transition-colors">
+        <div class="w-12 h-12 bg-surface-container flex items-center justify-center mb-stack-lg border card-border group-hover:border-dorado/40 transition-colors">
           <span class="material-symbols-outlined text-dorado">local_shipping</span>
         </div>
         <h3 class="text-on-surface font-bold uppercase mb-stack-sm tracking-wide">Precios de Bodega</h3>
@@ -163,9 +225,8 @@
         </div>
       </div>
 
-      <!-- Card 3 -->
       <div class="bg-surface border border-surface-container-high p-6 flex flex-col group hover:border-dorado/40 transition-colors">
-        <div class="w-12 h-12 bg-surface-container flex items-center justify-center mb-stack-lg border border-white/5 group-hover:border-dorado/40 transition-colors">
+        <div class="w-12 h-12 bg-surface-container flex items-center justify-center mb-stack-lg border card-border group-hover:border-dorado/40 transition-colors">
           <span class="material-symbols-outlined text-dorado">support_agent</span>
         </div>
         <h3 class="text-on-surface font-bold uppercase mb-stack-sm tracking-wide">Atención Directa</h3>
@@ -215,15 +276,36 @@
 
   <!-- Nav móvil -->
   <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 flex justify-around bg-surface-container-lowest border-t border-surface-variant pb-safe">
-    <a href="{% url 'catalogo:coleccion' %}" class="flex flex-col items-center py-3 px-6 text-secondary hover:text-dorado transition-colors">
+    <a href="{% url 'catalogo:coleccion' %}" class="flex flex-col items-center py-3 px-5 text-secondary hover:text-dorado transition-colors">
       <span class="material-symbols-outlined text-xl">grid_view</span>
       <span class="font-spec-mono text-[10px] tracking-widest uppercase mt-0.5">Catálogo</span>
     </a>
-    <a href="{% url 'catalogo:acceso' %}" class="flex flex-col items-center py-3 px-6 text-secondary hover:text-dorado transition-colors">
+    <button onclick="toggleTema()" class="flex flex-col items-center py-3 px-5 text-secondary hover:text-dorado transition-colors">
+      <span id="theme-icon-mobile" class="material-symbols-outlined text-xl">light_mode</span>
+      <span class="font-spec-mono text-[10px] tracking-widest uppercase mt-0.5">Tema</span>
+    </button>
+    <a href="{% url 'catalogo:acceso' %}" class="flex flex-col items-center py-3 px-5 text-secondary hover:text-dorado transition-colors">
       <span class="material-symbols-outlined text-xl">login</span>
       <span class="font-spec-mono text-[10px] tracking-widest uppercase mt-0.5">Ingresar</span>
     </a>
   </nav>
+
+  <script>
+    function toggleTema() {
+      var html = document.documentElement;
+      var esDark = html.classList.toggle('dark');
+      localStorage.setItem('premier-tema', esDark ? 'oscuro' : 'claro');
+      actualizarIcono(esDark);
+    }
+    function actualizarIcono(esDark) {
+      var icono = esDark ? 'light_mode' : 'dark_mode';
+      var d = document.getElementById('theme-icon');
+      var m = document.getElementById('theme-icon-mobile');
+      if (d) d.textContent = icono;
+      if (m) m.textContent = icono;
+    }
+    actualizarIcono(document.documentElement.classList.contains('dark'));
+  </script>
 
 </body>
 </html>
