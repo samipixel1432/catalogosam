@@ -17,7 +17,7 @@
   <meta property="og:site_name"   content="Premier Bodega Importadora" />
   <meta property="og:title"       content="Premier Bodega Importadora" />
   <meta property="og:description" content="Productos de calidad para el hogar, belleza, cocina y más. Precios directos de bodega." />
-  <meta property="og:image"       content="https://catalogosam-hxxq.vercel.app/static/img/logo_claro.png" />
+  <meta property="og:image"       content="https://catalogosam-hxxq.vercel.app/static/img/logo.png" />
   <meta property="og:url"         content="https://catalogosam-hxxq.vercel.app/" />
   <meta name="twitter:card"       content="summary" />
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -124,8 +124,7 @@
 
   <!-- NAV -->
   <header class="fixed top-0 w-full z-50 nav-glass border-b border-outline-variant flex items-center justify-between px-6 h-16">
-    <img src="{% static 'img/logo.png' %}"       alt="Premier" class="h-9 w-auto hidden dark:block"/>
-    <img src="{% static 'img/logo_claro.png' %}" alt="Premier" class="h-9 w-auto dark:hidden"/>
+    <img src="{% static 'img/logo.png' %}" alt="Premier" class="h-9 w-auto"/>
     <div class="flex items-center gap-4">
       <a href="{% url 'catalogo:coleccion' %}"
          class="hidden md:block font-spec-mono text-spec-mono text-secondary hover:text-dorado uppercase tracking-widest transition-colors">
@@ -157,10 +156,8 @@
     <div class="relative z-10 flex flex-col items-center text-center px-6 max-w-4xl mx-auto pt-24 pb-16">
 
       <div class="mb-8 fade-up">
-        <img src="{% static 'img/logo.png' %}"       alt="Premier Bodega Importadora"
-             class="w-40 h-40 md:w-52 md:h-52 object-contain mx-auto drop-shadow-[0_0_40px_rgba(212,175,55,0.3)] hidden dark:block"/>
-        <img src="{% static 'img/logo_claro.png' %}" alt="Premier Bodega Importadora"
-             class="w-40 h-40 md:w-52 md:h-52 object-contain mx-auto dark:hidden"/>
+        <img src="{% static 'img/logo.png' %}" alt="Premier Bodega Importadora"
+             class="w-40 h-40 md:w-52 md:h-52 object-contain mx-auto drop-shadow-[0_0_40px_rgba(212,175,55,0.3)]"/>
       </div>
 
       <div class="mb-6 fade-up-2">
@@ -256,8 +253,7 @@
   <!-- CTA FINAL -->
   <section class="border-t border-surface-variant bg-surface-container-lowest py-20">
     <div class="max-w-2xl mx-auto px-6 text-center flex flex-col items-center gap-6">
-      <img src="{% static 'img/logo.png' %}"       alt="Premier" class="w-16 h-16 object-contain opacity-80 hidden dark:block"/>
-      <img src="{% static 'img/logo_claro.png' %}" alt="Premier" class="w-16 h-16 object-contain opacity-80 dark:hidden"/>
+      <img src="{% static 'img/logo.png' %}" alt="Premier" class="w-16 h-16 object-contain opacity-80"/>
       <h2 class="font-headline-md text-headline-md text-on-surface">¿Listo para explorar el catálogo?</h2>
       <div class="flex flex-col sm:flex-row gap-4">
         <a href="{% url 'catalogo:coleccion' %}"
