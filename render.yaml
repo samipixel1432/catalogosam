@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: premier-catalogo
+    runtime: python
+    buildCommand: bash build.sh
+    startCommand: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: CSRF_TRUSTED_ORIGINS
+        value: https://premier-catalogo.onrender.com
+      - key: WEB_CONCURRENCY
+        value: "2"
