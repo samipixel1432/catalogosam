@@ -1,0 +1,15 @@
+.claude
+.codex
+.git
+.venv
+venv
+env
+__pycache__
+*.pyc
+db.sqlite3
+*.xlsx
+Catalogoso
+productos_import.json
+extract_productos.py
+C*UsersPCDownloadsfotos_list.txt
+staticfiles

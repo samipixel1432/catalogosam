@@ -17,8 +17,8 @@
   <meta property="og:site_name"   content="Premier Bodega Importadora" />
   <meta property="og:title"       content="Premier Bodega Importadora" />
   <meta property="og:description" content="Productos de calidad para el hogar, belleza, cocina y más. Precios directos de bodega." />
-  <meta property="og:image"       content="https://catalogosam-hxxq.vercel.app/static/img/logo.png" />
-  <meta property="og:url"         content="https://catalogosam-hxxq.vercel.app/" />
+  <meta property="og:image"       content="{{ request.scheme }}://{{ request.get_host }}{% static 'img/logo.png' %}" />
+  <meta property="og:url"         content="{{ request.scheme }}://{{ request.get_host }}/" />
   <meta name="twitter:card"       content="summary" />
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
