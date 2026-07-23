@@ -18,6 +18,9 @@ else:
     print('Superusuario ya existe.')
 "
 
+echo "=== Cargando catálogo de productos ==="
+python manage.py cargar_catalogo
+
 echo "=== Recolectando archivos estáticos ==="
 python manage.py collectstatic --noinput
 
